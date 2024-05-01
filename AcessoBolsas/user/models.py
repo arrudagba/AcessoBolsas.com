@@ -59,6 +59,8 @@ class User(models.Model):
 
     sexo = models.CharField(help_text='Informe o sexo', max_length=1, null=True, blank=True, choices=SEXO_CHOICES)
 
+    foto_perfil = models.ImageField(upload_to='perfil_usuario', default='default.jpg')
+
     is_admin = models.BooleanField(default=False)
     
     is_active = models.BooleanField(default=True)

@@ -10,7 +10,7 @@ class Institution(models.Model):
     contato = models.CharField(max_length=50, null=False, blank=False)
     endereco = models.CharField(max_length=255, null=True, blank=True, )
     descricao = models.CharField(max_length=1000, null=False, blank=False)
-    #foto_perfil = models.ImageField(upload_to='perfil_instituicao', default='default.jpg')
+    foto_perfil = models.ImageField(upload_to='perfil_instituicao', default='default.jpg')
 
     def __str__(self):
         return self.nome
