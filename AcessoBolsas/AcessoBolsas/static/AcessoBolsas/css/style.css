@@ -1,0 +1,125 @@
+html {
+    height: 100%;
+    width: 100%;
+}
+
+footer {
+    text-align: center;
+    padding: 3px;
+    background-color: rgb(230, 230, 230);
+    color: black;
+}
+.linha{
+    display: flex;
+    flex: 1;
+    width: 100%;
+    position: fixed;
+    height: 60px;
+    background-color: rgb(255,255,255);
+    top: 0;
+    left: 0;
+    z-index: 10000;
+}
+.menu_image{
+    height: 40px;
+    margin-left: 30px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+.head {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    position: relative;
+    height: 400px;
+    background-color: rgb(255, 249, 236);
+    border: none;
+    margin-top: 60px;
+    align-items: center;
+
+}
+
+.logo {
+    margin: auto;
+}
+
+.logo_image {
+    height: 120px;
+}
+.buttons{
+    margin-left:auto;
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, auto); 
+    column-gap: 20px; 
+}
+.btn1 {
+    border-radius: 10px;
+    background-color: #FF914D;
+    border-color: #FF914D;
+    color: white;
+    font-size: 15px;
+    border: solid transparent;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    font-weight: bold;
+    margin: 5px;
+    
+
+}
+
+
+.input-img {
+    width: 30px;
+    padding: 10px;
+    padding-top: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.input {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    position: relative;
+    height: 50px;
+    background-color: white;
+    border-radius: 10px;
+    margin-top: 50px;
+    align-items: center;
+    box-shadow: 0 4px rgb(187, 186, 186);
+
+}
+
+.input-pesquisa {
+    border: none;
+    font-size: 20px;
+    width: 100%;
+
+}
+
+input::placeholder {
+    color: rgb(187, 186, 186);
+    font-style: italic;
+
+}
+
+
+.text-recomendacoes{
+    font-size: 30px;
+    color: #FF914D;
+    font-weight: bold;
+}
+
+.recomendacoes{
+    display: flex;
+    width: 100%;
+    position: relative;
+    height: 400px;
+    background-color: rgb(255, 249, 236);
+    align-items: center;
+    border-radius: 40px;
+    margin: 30px;
+}
