@@ -8,6 +8,7 @@ footer {
     padding: 3px;
     background-color: rgb(230, 230, 230);
     color: black;
+    
 }
 .linha{
     display: flex;
@@ -66,6 +67,7 @@ footer {
     padding-bottom: 4px;
     font-weight: bold;
     margin: 5px;
+    font-family: Inter;
     
 
 }
@@ -111,6 +113,7 @@ input::placeholder {
     font-size: 30px;
     color: #FF914D;
     font-weight: bold;
+    font-family: Inter;
 }
 
 .recomendacoes{
@@ -121,5 +124,12 @@ input::placeholder {
     background-color: rgb(255, 249, 236);
     align-items: center;
     border-radius: 40px;
-    margin: 30px;
+    margin: auto;
+}
+
+.div-recomendacoes{
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
 }
