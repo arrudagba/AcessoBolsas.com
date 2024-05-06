@@ -8,25 +8,28 @@ footer {
     padding: 3px;
     background-color: rgb(230, 230, 230);
     color: black;
-    
+
 }
-.linha{
+
+.linha {
     display: flex;
     flex: 1;
     width: 100%;
     position: fixed;
     height: 60px;
-    background-color: rgb(255,255,255);
+    background-color: rgb(255, 255, 255);
     top: 0;
     left: 0;
     z-index: 10000;
 }
-.menu_image{
+
+.menu_image {
     height: 40px;
     margin-left: 30px;
     margin-top: 10px;
     cursor: pointer;
 }
+
 .head {
     display: flex;
     flex: 1;
@@ -38,28 +41,40 @@ footer {
     margin-top: 60px;
     align-items: center;
 
+
 }
 
 .logo {
+    display: grid;
+    grid-template-columns: auto;
+    column-gap: 20px;
+}
+
+.div-logo {
     margin: auto;
 }
 
-.logo_image {
-    height: 120px;
+.pencil_image {
+    width: 500px;
+    margin: auto;
+    margin-bottom: 30px;
 }
-.buttons{
-    margin-left:auto;
+
+.buttons {
+    margin-left: auto;
     margin-top: 10px;
     display: grid;
-    grid-template-columns: repeat(2, auto); 
-    column-gap: 20px; 
+    grid-template-columns: repeat(2, auto);
+    column-gap: 8px;
+    margin-right: 10px;
 }
+
 .btn1 {
     border-radius: 10px;
     background-color: #FF914D;
     border-color: #FF914D;
     color: white;
-    font-size: 15px;
+    font-size: 13px;
     border: solid transparent;
     padding-left: 20px;
     padding-right: 20px;
@@ -68,7 +83,7 @@ footer {
     font-weight: bold;
     margin: 5px;
     font-family: Inter;
-    
+
 
 }
 
@@ -99,7 +114,12 @@ footer {
     border: none;
     font-size: 20px;
     width: 100%;
+    margin: auto;
+    outline: none;
+}
 
+.input-pesquisa:focus {
+    border: none;
 }
 
 input::placeholder {
@@ -109,14 +129,14 @@ input::placeholder {
 }
 
 
-.text-recomendacoes{
-    font-size: 30px;
+.text-recomendacoes {
+    font-size: 24px;
     color: #FF914D;
     font-weight: bold;
     font-family: Inter;
 }
 
-.recomendacoes{
+.recomendacoes {
     display: flex;
     width: 100%;
     position: relative;
@@ -127,9 +147,18 @@ input::placeholder {
     margin: auto;
 }
 
-.div-recomendacoes{
+.div-recomendacoes {
     align-items: center;
     padding-left: 20px;
     padding-right: 20px;
     padding-bottom: 20px;
+}
+
+.titulo {
+    font-family: Outfit;
+    font-weight: bold;
+    font-size: 80px;
+    color: #405BBC;
+    margin: auto;
+    z-index: 10000;
 }
