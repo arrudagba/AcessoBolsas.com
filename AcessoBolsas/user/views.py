@@ -92,7 +92,7 @@ def viewUser(request):
         'telefone': user.telefone,
         'dataNascimento': user.dataNascimento,
         'sexo': user.sexo,
-        'foto_perfil': user.foto_perfil
+        'fotoPerfil': user.fotoPerfil
     }
     return render(request, 'user/viewUser.html', context)
 
