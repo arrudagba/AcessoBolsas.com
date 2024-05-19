@@ -1,0 +1,28 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+    <title>Editar Bolsa {{scholarship.titulo}}</title>
+    <head>
+        <h3 class='text-center'>Editar Bolsa</h3>
+    </head>
+    <body>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class='mb-3 form-group'>
+                <label for='id_titulo' class='form-label'>Título</label>
+                <input type='text' name='titulo' class='form-control' id='id_titulo' placeholder='Digite o titulo' value='{{ form.initial.titulo }}' autofocus>
+            </div>
+            <div class='mb-3 form-group'>
+                <label for='id_tipoBolsa' class='form-label'>Tipo da Bolsa</label>
+                <input type='text' name='tipoBolsa' class='form-control' id='id_tipoBolsa' placeholder='Digite o tipo da bolsa' value='{{ form.initial.tipoBolsa }}' autofocus>
+            </div>
+            <div class='mb-3 form-group'>
+                <label for='id_descricao' class='form-label'>Descrição</label>
+                <textarea name='descricao' rows='10' class='form-control' id='id_descricao' placeholder='Digite a descrição' value='{{ form.initial.descricao }}' autofocus></textarea>
+            </div>
+            <div class='mt-3 d-flex justify-content-between'>
+                <button type='submit' class='btn btn-primary'>Atualiza Bolsa</button>
+            </div>
+        </form>
+    </body>
+</html>

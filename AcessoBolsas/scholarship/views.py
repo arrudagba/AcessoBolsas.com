@@ -31,11 +31,11 @@ def createScholarship(request):
 def editScholarship(request, slug):
     context = {}
 
-    institution = request.user
+    scholarship = get_object_or_404(Scholarship, slug=slug)
+    institution = scholarship.__getattribute__('instituicao')
     if not institution.checked:
         return redirect("loginInstitution")
     
-    scholarship = get_object_or_404(Scholarship, slug=slug)
     if request.POST:
         form = ScholarshipUpdateForm(request.POST, request.FILES or None, 
                                      instance=scholarship)
@@ -78,3 +78,9 @@ def deleteScholarship(request, slug):
     
     context['scholarship'] = scholarship
     return render(request, 'scholarship/deleteScholarship.html', context)
+
+def listScholarships(request):
+    context = {}
+    scholarships = Scholarship.objects.all()
+    context['scholarships'] = scholarships
+    return render(request,'scholarship/listScholarships.html', context)

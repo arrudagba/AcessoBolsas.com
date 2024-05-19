@@ -1,6 +1,11 @@
 from django.db import models
+from random import randint
+from django.utils.text import slugify
+from django.db.models.signals import post_delete, pre_save
 
 # Create your models here.
+
+SLUG_LIST = []
 
 class Scholarship(models.Model):
     id = models.AutoField(primary_key=True, null=False, blank=False, unique=True)
@@ -23,3 +28,14 @@ class Scholarship(models.Model):
 
     def __str__(self):
         return self.titulo
+    
+def pre_save_scholarship_receiver(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        slug_random = 0
+        while slug_random not in SLUG_LIST:
+            slug_random = randint(1, 1000)
+            SLUG_LIST.append(slug_random)
+
+        instance.slug = slugify(instance.instituicao.nome + "-" + str(slug_random))
+
+pre_save.connect(pre_save_scholarship_receiver, sender=Scholarship)
