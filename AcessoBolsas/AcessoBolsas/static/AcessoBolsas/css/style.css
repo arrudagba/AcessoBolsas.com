@@ -176,7 +176,7 @@ input::placeholder {
     border-radius: 40px;
     margin: auto;
     margin-bottom: 30px;
-   
+
 }
 
 .inputCadastro {
@@ -191,7 +191,7 @@ input::placeholder {
 }
 
 
-.inputCadastro_text_desc{
+.inputCadastro_text_desc {
     height: 100px;
     border: none;
     font-size: 15px;
@@ -200,23 +200,24 @@ input::placeholder {
     outline: none;
     border-radius: 20px;
     font-family: Inter;
-    text-align:center
+    text-align: center
 }
 
-.blank1{
+.blank1 {
     font-size: 20px;
 }
-.blank2{
+
+.blank2 {
     font-size: 10px;
 }
 
-.headerInput{
+.headerInput {
     font-family: Outfit;
     font-weight: bold;
     font-size: 20px;
 }
 
-.questions{
+.questions {
     margin: auto;
 }
 
@@ -229,8 +230,103 @@ input::placeholder {
     height: 270px;
     background-color: rgb(255, 249, 236);
     border: none;
-    margin-top: 60px;
+    margin-top: 30px;
     align-items: center;
 
+}
+
+
+
+
+/* css decisao cadastros ----------------------------------------------------------------------------- */
+
+
+
+.img_seta {
+    height: 20px;
+}
+
+.voltar {
+    font-family: Inter;
+    font-size: 17px;
+    font-weight: bold;
+    font-style: italic;
+    color: #FF914D;
+
+}
+
+.div-box-decisao{
+    margin-top:100px;
+
+}
+
+.box-decisao{
+    display: flex;
+    width: 400px;
+    position: relative;
+    height: 200px;
+    background-color: rgb(255, 249, 236);
+    align-items: center;
+    border-radius: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom:200px;
+}
+
+.text-cadastro{
+    font-family: Inter;
+    font-size: 24px;
+    font-weight: bold;
+    color: #FF914D;
+
+    display: flex;
+    width: 400px;
+    position: relative;
+    align-items: center;
+    border-radius: 40px;
+    margin: auto;
+}
+
+.button-inst{
+    border-radius: 10px;
+    background-color: #FCDA00;
+    border-color: #FCDA00;
+    color: white;
+    font-size: 17px;
+    border: solid transparent;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    font-weight: bold;
+    margin: 5px;
+    font-family: Inter;
+    width: 140px;
+
+}
+
+.button-usu{
+    border-radius: 10px;
+    background-color: #F36465;
+    border-color: #F36465;
+    color: white;
+    font-size: 17px;
+    border: solid transparent;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    font-weight: bold;
+    margin: 5px;
+    font-family: Inter;  
+    width: 140px;
+
+}
+
+.botoes-cadastro{
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    column-gap: 8px;
+    margin: auto;
 
 }
