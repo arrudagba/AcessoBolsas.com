@@ -23,3 +23,10 @@ def editar_perfil(request):
         return redirect('perfil_instituicao')
 
     return render(request, 'editar_perfil.html', {'perfil': perfil})
+
+
+def listInstitutions(request):
+    context = {}
+    institutions = Institution.objects.all()
+    context['institutions'] = institutions
+    return render(request,'institution/listInstitutions.html', context)
