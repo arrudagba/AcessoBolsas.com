@@ -1,0 +1,36 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title> Criar Instituição </title>
+    </head>
+    <body>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="id_nome" class="form-label">Nome</label>
+                <input type="text" name="nome" class="form-control" id="id_nome" placeholder="Nome da instituição" required autofocus>
+            </div>
+            <div class="mb-3">
+                <label for="id_cnpj" class="form-label">CNPJ</label>
+                <input type="text" name="cnpj" class="form-control" id="id_cnpj" placeholder="CNPJ da instituição" required>
+            </div>
+            <div class="mb-3">
+                <label for="id_contato" class="form-label">Contato</label>
+                <input type="text" name="contato" class="form-control" id="id_contato" placeholder="Contato de instituição" required>
+            </div>
+            <div class="mb-3">
+                <label for="id_endereco" class="form-label">Endereço</label>
+                <input type="text" name="endereco" class="form-control" id="id_endereco" placeholder="Endereço de instituição" required>
+            </div>
+            <div class="mb-3">
+                <label for="id_descricao" class="form-label">Descrição</label>
+                <textarea name="descricao" rows="10" class="form-control" id="id_descricao" placeholder="Descrição da instituição" required></textarea>
+            </div>
+            <div class='text-center'>
+                <button type='submit' class='btn btn-primary'>Criar Instituição</button>
+            </div>
+        </form>
+    </body>
+</html>
