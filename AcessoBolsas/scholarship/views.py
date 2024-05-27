@@ -10,8 +10,8 @@ def createScholarship(request):
     context = {}
 
     institution = request.user
-    if not institution.checked:
-        return redirect("loginInstitution")
+    # if not institution.checked:
+    #    return redirect("loginInstitution")
     
     form = ScholarshipRegisterForm(request.POST or None, request.FILES or None)
 

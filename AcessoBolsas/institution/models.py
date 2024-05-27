@@ -1,8 +1,13 @@
 from django.db import models
+from random import randint
 from django.contrib.auth.models import User
+from django.utils.text import slugify
+from django.db.models.signals import post_delete, pre_save
+
+SLUG_LIST = []
 
 class Institution(models.Model):
-    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+    # usuario = models.OneToOneField(User, on_delete=models.CASCADE)
     id = models.AutoField(primary_key=True, null=False, blank=False, unique=True)
     nome = models.CharField(max_length=100, null=False, blank=False)
     cnpj = models.CharField(max_length=14, null=False, blank=False, unique=True)
@@ -10,7 +15,20 @@ class Institution(models.Model):
     endereco = models.CharField(max_length=255, null=True, blank=True)
     descricao = models.CharField(max_length=1000, null=False, blank=False)
     foto_perfil = models.ImageField(upload_to='perfil_instituicao', default='default.jpg')
+    slug = models.SlugField(blank=True, unique=True)
     checked = models.BooleanField(default=False)
 
     def __str__(self):
         return self.nome
+    
+
+def pre_save_institution_receiver(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        slug_random = 0
+        while slug_random not in SLUG_LIST:
+            slug_random = randint(1, 1000)
+            SLUG_LIST.append(slug_random)
+        
+        instance.slug = slugify(instance.nome + "-" + str(slug_random))
+
+pre_save.connect(pre_save_institution_receiver, sender=Institution)
