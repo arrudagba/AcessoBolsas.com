@@ -24,4 +24,5 @@ urlpatterns = [
     path('', viewHome , name='home'),
     path('user/', include('user.urls')),
     path('scholarship/', include('scholarship.urls')),
+    path('institution/', include('institution.urls')),
 ]

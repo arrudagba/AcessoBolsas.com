@@ -17,8 +17,8 @@ def editar_perfil(request):
         perfil.contato = request.POST['contato']
         perfil.endereco = request.POST['endereco']
         perfil.descricao = request.POST['descricao']
-        #if 'foto_perfil' in request.FILES:
-            #perfil.foto_perfil = request.FILES['foto_perfil']
+        if 'foto_perfil' in request.FILES:
+            perfil.foto_perfil = request.FILES['foto_perfil']
         perfil.save()
         return redirect('perfil_instituicao')
 

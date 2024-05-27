@@ -1,0 +1,51 @@
+{%%}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'institution/css/styles.css' %}">
+    <title>Perfil Instituições</title>
+</head>
+<body>
+    <div class="linha">
+        <div class="menu">
+            <img src="{% static 'institution/img/menu.svg' %}" class="menu_image">
+        </div>
+        <div class="logout">
+            <button class="botão_logout" type="button" onclick="alert('você escolheu sair')">Log out</button>
+        </div>
+    </div>
+    <div class="head">
+        <div class="logo">
+            <img src="{% static 'institution/img/logo.png' %}" class="logo_image">
+        </div>
+    </div>
+
+    <div class="usuário">
+        <div class="pfp">
+            <img src="{{ perfil.foto_perfil.url }}" class="user_image">
+        </div>
+
+        <div class="textos">
+            <p>Nome da instituição: {{ perfil.nome }}<br></p>
+            <p>CNPJ: {{ perfil.cnpj }}<br></p>
+            <p>Contatos: {{ perfil.contato }}<br></p>
+            <p>Endereço: {{ perfil.endereco }}<br></p>
+            <p>Sobre a Instituição: {{ perfil.descricao }}<br></p>
+        </div>
+    </div>
+
+    <div class="botões">
+        <button class="botão_editar" type="button">Editar perfil</button>
+        <button class="botão_ver_bolsas" type="button">Bolsas Cadastradas</button>
+        <button class="botão_deletar" type="button">Deletar Perfil</button>
+    </div>
+
+    <footer>
+        <p>Footer</p>
+    </footer>
+</body>
+</html>
