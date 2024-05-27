@@ -1,13 +1,15 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from institution.models import Institution
 
-@login_required
-def perfil_instituicao(request):
-    perfil = Institution.objects.get(usuario=request.user)
-    return render(request, 'perfil_instituicao.html', {'perfil': perfil})
+#@login_required
+def perfil_instituicao(request, slug):
+    context = {}
+    institution = get_object_or_404(Institution, slug=slug)
+    context['institution'] = institution
+    return render(request, 'institution/viewInstitution.html', context)
 
-@login_required
+#@login_required
 def editar_perfil(request):
     perfil = Institution.objects.get(usuario=request.user)
 
@@ -22,7 +24,7 @@ def editar_perfil(request):
         perfil.save()
         return redirect('perfil_instituicao')
 
-    return render(request, 'editar_perfil.html', {'perfil': perfil})
+    return render(request, 'institution/editar_perfil.html', {'perfil': perfil})
 
 
 def listInstitutions(request):
