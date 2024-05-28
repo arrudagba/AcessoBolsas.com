@@ -255,12 +255,12 @@ input::placeholder {
 
 }
 
-.div-box-decisao{
-    margin-top:100px;
+.div-box-decisao {
+    margin-top: 100px;
 
 }
 
-.box-decisao{
+.box-decisao {
     display: flex;
     width: 400px;
     position: relative;
@@ -270,10 +270,10 @@ input::placeholder {
     border-radius: 40px;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom:200px;
+    margin-bottom: 200px;
 }
 
-.text-cadastro{
+.text-cadastro {
     font-family: Inter;
     font-size: 24px;
     font-weight: bold;
@@ -287,7 +287,7 @@ input::placeholder {
     margin: auto;
 }
 
-.button-inst{
+.button-inst {
     border-radius: 10px;
     background-color: #FCDA00;
     border-color: #FCDA00;
@@ -305,7 +305,7 @@ input::placeholder {
 
 }
 
-.button-usu{
+.button-usu {
     border-radius: 10px;
     background-color: #F36465;
     border-color: #F36465;
@@ -318,15 +318,91 @@ input::placeholder {
     padding-bottom: 4px;
     font-weight: bold;
     margin: 5px;
-    font-family: Inter;  
+    font-family: Inter;
     width: 140px;
 
 }
 
-.botoes-cadastro{
+.botoes-cadastro {
     display: grid;
     grid-template-columns: repeat(2, auto);
     column-gap: 8px;
     margin: auto;
 
+}
+
+
+
+/* css  cadastros usuario ----------------------------------------------------------------------------- */
+
+.select_genero {
+    border: none;
+    font-size: 17px;
+    width: 100%;
+    margin: auto;
+    outline: none;
+    border-radius: 20px;
+    font-family: Inter;
+
+}
+
+select {
+    color: rgb(187, 186, 186);
+    font-style: italic;
+    font-family: Inter;
+}
+
+select option {
+    color: #000000;
+}
+option[value=""][disabled] {
+    color: rgb(187, 186, 186);
+  }
+
+
+select:focus,
+select:active {
+  color: rgb(0, 0, 0);
+}
+input[type="date"] {
+    color: rgb(187, 186, 186);
+    font-style: italic;
+    font-family: Inter;
+}
+
+
+.box_cadastro_usu {
+    display: flex;
+    width: 400px;
+    position: relative;
+    height: 600px;
+    background-color: rgb(255, 249, 236);
+    align-items: center;
+    border-radius: 40px;
+    margin: auto;
+    margin-bottom: 30px;
+
+}
+
+.questions_cadastro_usu{
+    margin: auto;
+    margin-top: 23.5px;
+
+}
+
+.cadastre-se{
+    border-radius: 10px;
+    background-color:#00D015;
+    border-color: #00D015;
+    color: white;
+    font-size: 17px;
+    border: solid transparent;
+    font-weight: bold;
+    font-family: Inter;
+    padding: 13px;
+    display: flex;
+    position: relative;
+    align-items: center;
+    margin: auto;
+    margin-bottom: 30px;
 }
