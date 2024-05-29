@@ -4,7 +4,9 @@ from institution import views
 app_name ='institution'
 
 urlpatterns = [
-    path('<slug>/profile/', views.perfil_instituicao, name='profile-institution'),
-    path('<slug>/edit/', views.editar_perfil, name='edit-institution'),
+    path('<slug>/profile/', views.viewInstitution, name='profile-institution'),
+    path('<slug>/edit/', views.editInstitution, name='edit-institution'),
     path('', views.listInstitutions, name='list-institution'),
+    path('create/', views.createInstitution, name='create-institution'),
+    path('<slug>/delete/', views.deleteInstitution, name='delete-institution'),
 ]
