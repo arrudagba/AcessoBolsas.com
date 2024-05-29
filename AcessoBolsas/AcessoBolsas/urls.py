@@ -17,11 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
-from AcessoBolsas.views import viewHome
+#from AcessoBolsas.views import viewHome
+from AcessoBolsas.views import HomeView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', viewHome , name='home'),
+    path('', HomeView , name='home'),
     path('user/', include('user.urls')),
     path('scholarship/', include('scholarship.urls')),
     path('institution/', include('institution.urls')),
