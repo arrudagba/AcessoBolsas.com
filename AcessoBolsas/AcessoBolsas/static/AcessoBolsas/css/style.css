@@ -83,8 +83,13 @@ footer {
     font-weight: bold;
     margin: 5px;
     font-family: Inter;
+    cursor: pointer;
 
 
+}
+
+.btn1:hover{
+    cursor: pointer;
 }
 
 
@@ -302,7 +307,12 @@ input::placeholder {
     margin: 5px;
     font-family: Inter;
     width: 140px;
+    cursor: pointer;
+    
 
+}
+.button-inst:hover{
+    cursor: pointer;
 }
 
 .button-usu {
@@ -320,6 +330,7 @@ input::placeholder {
     margin: 5px;
     font-family: Inter;
     width: 140px;
+    cursor: pointer;
 
 }
 

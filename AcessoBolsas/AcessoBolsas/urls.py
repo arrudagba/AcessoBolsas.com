@@ -21,6 +21,9 @@ from django.urls import path
 from django.urls.conf import include
 #from AcessoBolsas.views import viewHome
 from AcessoBolsas.views import HomeView
+from AcessoBolsas.views import SignUp
+from AcessoBolsas.views import SignUpInstitution
+from AcessoBolsas.views import SignUpUser
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,6 +31,9 @@ urlpatterns = [
     path('user/', include('user.urls')),
     path('scholarship/', include('scholarship.urls')),
     path('institution/', include('institution.urls')),
+    path('sign_up/', SignUp, name='sign_up'),
+    path('sign_up/institution/', SignUpInstitution, name='sign_up_institution'),
+    path('sign_up/user/', SignUpUser, name='sign_up_user'),
 ]
 
 if settings.DEBUG:
