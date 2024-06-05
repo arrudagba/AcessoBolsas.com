@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
+from user.models import User
 from user.forms import UserRegisterForm, UserUpdateForm
 
 # Create your views here.
@@ -8,15 +9,23 @@ from user.forms import UserRegisterForm, UserUpdateForm
 def registerUser(request):
     context = {}
 
-    if request.POST:
+    if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            form.save()
-            email = form.cleaned_data.get('email')
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password1'])
+            user.save()
+            username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
-            user = authenticate(email=email, password=raw_password)
-            login(request, user)
-            return redirect('home')
+            user = authenticate(username=username, password=raw_password)
+            
+            if user is not None:
+                login(request, user)
+                messages.success(request, 'Usuário cadastrado com sucesso!')
+                return redirect('home')
+            else:
+                messages.error(request, 'Erro ao cadastrar usuário!')
+                return redirect('login')
         else:
             context['registrationForm'] = form
     else:
@@ -25,19 +34,21 @@ def registerUser(request):
 
     return render(request, 'user/registerUser.html', context)
 
-def editUser(request):
+def editUser(request, slug):
     if not request.user.is_authenticated:
         return redirect("login")
 
     context = {}
 
-    if request.POST:
-        form = UserUpdateForm(request.POST, instance=request.user)
+    user = get_object_or_404(User, slug=slug)
+
+    if request.method == 'POST':
+        form = UserUpdateForm(request.POST, instance=user, slug=slug)
         if form.is_valid():
             form.initial = {
                 "email": request.POST['email'],
                 "username": request.POST['username'],
-                "name": request.POST['name'],
+                "nome": request.POST['nome'],
                 "telefone": request.POST['telefone'],
                 "dataNascimento": request.POST['dataNascimento'],
                 "sexo": request.POST['sexo'],
@@ -49,12 +60,12 @@ def editUser(request):
     else:
         form = UserUpdateForm(
             {
-                "email": request.user.email,
-                "username": request.user.username,
-                "name": request.user.name,
-                "telefone": request.user.telefone,
-                "dataNascimento": request.user.dataNascimento,
-                "sexo": request.user.sexo,
+                "email": user.email,
+                "username": user.username,
+                "nome": user.nome,
+                "telefone": user.telefone,
+                "dataNascimento": user.dataNascimento,
+                "sexo": user.sexo,
             }
         )
 
@@ -62,38 +73,35 @@ def editUser(request):
 
     return render(request, 'user/editUser.html', context)
 
-def deleteUser(request):
+def deleteUser(request, slug):
     if not request.user.is_authenticated:
         return redirect("login")
     
     context = {}
 
-    if request.POST:
-        email = request.POST['email']
+    if request.method == 'POST':
+        username = request.POST['username']
         password = request.POST['password']
 
-        user = authenticate(email=email, password=password)
+        user = authenticate(username=username, password=password, slug=slug)
 
         if user:
             user.delete()
             messages.success(request, 'Usuário deletado com sucesso!')
             return redirect("home")
         else:
-            messages.warning(request, 'Email ou senha incorretos! Tente novamente.')
+            messages.warning(request, 'Username ou senha incorretos! Tente novamente.')
 
     return render(request, 'user/deleteUser.html', context)
 
-def viewUser(request):
-    user = request.user
-    context = {
-        'username': user.username,
-        'name': user.name,
-        'email': user.email,
-        'telefone': user.telefone,
-        'dataNascimento': user.dataNascimento,
-        'sexo': user.sexo,
-        'fotoPerfil': user.fotoPerfil
-    }
+def viewUser(request, slug):
+    context = {}
+    user = get_object_or_404(User, slug=slug)
+    context['user'] = user
     return render(request, 'user/viewUser.html', context)
 
-
+def listUsers(request):
+    context = {}
+    users = User.objects.all()
+    context['users'] = users
+    return render(request,'user/listUsers.html', context)

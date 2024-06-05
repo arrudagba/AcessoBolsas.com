@@ -1,0 +1,27 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title> Lista de Usuários </title>
+    <head>
+    <body>
+        <a href="{% url 'user:register-user' %}">Criar Usuário</a>
+        <h1> Lista de Usuários </h1>
+        <table>
+            <tr><th>Email</th><th>Nome</th><th>Username</th></tr>
+            {% if users %}
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.email }}</td><td>{{ user.nome }}</td><td>{{ user.username }}</td>
+                        <td><a href="{% url 'user:edit-user' slug=user.slug %}">Editar</a> /
+                            <a href="{% url 'user:profile-user' slug=user.slug %}">View</a> / 
+                            <a href="{% url 'user:delete-user' slug=user.slug %}">Deletar</a></td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr><th colspan="5">Ainda não tem usuários cadastrados</th></tr>
+            {% endif %} 
+        </table>
+    </body>
+</html>

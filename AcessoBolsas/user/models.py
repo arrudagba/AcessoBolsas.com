@@ -1,33 +1,38 @@
 from django.db import models
+from django.utils.text import slugify
+from random import randint
+from django.db.models.signals import post_delete, pre_save
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 # Create your models here.
 
+SLUG_LIST = []
+
 class AdminMyAccount(BaseUserManager):
 
-    def create_user(self, username, email, name, password = None):
+    def create_user(self, username, email, nome,  password = None):
         if not username:
             raise ValueError("Usuário precisa ter um nome de usuário.")
         if not email:
             raise ValueError("Usuário precisa ter um email.")
-        if not name:
+        if not nome:
             raise ValueError("Usuário precisa ter um nome.")
         
         user = self.model(
             username = username,
             email = self.normalize_email(email),
-            name = name,
+            nome = nome,
         )
         user.set_password(password)
         user.save(using=self._db)
 
         return user
     
-    def create_superuser(self, username, email, name, password):
+    def create_superuser(self, username, email, nome, password):
         user = self.create_user(
             username = username,
             email = self.normalize_email(email),
-            name = name,
+            nome = nome,
             password = password,
         )
         user.is_admin = True
@@ -38,7 +43,7 @@ class AdminMyAccount(BaseUserManager):
         return user
 
 
-class User(models.Model):
+class User(AbstractBaseUser):
     SEXO_CHOICES = (
         ('M', 'Masculino'),
         ('F', 'Feminino'),
@@ -49,7 +54,7 @@ class User(models.Model):
 
     username = models.CharField(help_text='Informe o nome de usuário', max_length=100, null=False, blank=False, unique=True)
 
-    name = models.CharField(help_text='Informe o nome', max_length=100, null=False, blank=False)
+    nome = models.CharField(help_text='Informe o nome', max_length=100, null=False, blank=False)
 
     email = models.EmailField(help_text='Informe o email', max_length=254, null=False, blank=False, unique=True) 
 
@@ -60,6 +65,8 @@ class User(models.Model):
     sexo = models.CharField(help_text='Informe o sexo', max_length=1, null=True, blank=True, choices=SEXO_CHOICES)
 
     fotoPerfil = models.ImageField(upload_to='perfil_usuario', default='default.jpg', null=True, blank=True)
+
+    slug = models.SlugField(blank=True, unique=True)
 
     is_admin = models.BooleanField(default=False)
     
@@ -73,7 +80,7 @@ class User(models.Model):
     objects = AdminMyAccount()
 
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS=['username','name','email']
+    REQUIRED_FIELDS=['nome','email']
 
     def __str__(self):
         return self.username
@@ -83,3 +90,14 @@ class User(models.Model):
     
     def has_module_perms(self,app_label):
         return True
+    
+def pre_save_user_receiver(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        slug_random = 0
+        while slug_random not in SLUG_LIST:
+            slug_random = randint(1, 1000)
+            SLUG_LIST.append(slug_random)
+
+        instance.slug = slugify(instance.username + "-" + str(slug_random))
+
+pre_save.connect(pre_save_user_receiver, sender=User)

@@ -63,6 +63,8 @@ TEMPLATES = [
     },
 ]
 
+AUTH_USER_MODEL = 'user.User'
+
 WSGI_APPLICATION = 'AcessoBolsas.wsgi.application'
 
 # Database

@@ -14,7 +14,8 @@
                 {% for scholarship in scholarships %}
                     <tr>
                         <td>{{ scholarship.titulo }}</td><td>{{ scholarship.tipoBolsa }}</td><td>{{ scholarship.descricao }}</td>
-                        <td><a href="{% url 'scholarship:edit-scholarship' slug=scholarship.slug %}">Editar</a> / 
+                        <td><a href="{% url 'scholarship:edit-scholarship' slug=scholarship.slug %}">Editar</a> /
+                            <a href="{% url 'scholarship:profile-scholarship' slug=scholarship.slug %}">View</a> /  
                             <a href="{% url 'scholarship:delete-scholarship' slug=scholarship.slug %}">Deletar</a></td>
                     </tr>
                 {% endfor %}

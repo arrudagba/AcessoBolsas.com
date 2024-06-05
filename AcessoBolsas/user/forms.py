@@ -9,14 +9,14 @@ class UserRegisterForm(UserCreationForm):
     
     class Meta:
         model = User
-        fields = ('username', 'email', 'password1', 'password2')
+        fields = ('username', 'email', 'nome', 'password1', 'password2', 'telefone', 'dataNascimento', 'sexo')
 
 
 class UserUpdateForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'name', 'telefone', 'dataNascimento', 'sexo')
+        fields = ('username', 'email', 'nome', 'telefone', 'dataNascimento', 'sexo')
 
     def clean_email(self):
         if self.is_valid():
