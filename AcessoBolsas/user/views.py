@@ -59,7 +59,7 @@ def editUser(request, slug):
             messages.warning(request, 'E-mail ou username indisponíveis. Tente novamente.')
     else:
         form = UserUpdateForm(
-            {
+        initial={
                 "email": user.email,
                 "username": user.username,
                 "nome": user.nome,
