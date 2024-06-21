@@ -9,13 +9,16 @@ SLUG_LIST = []
 class Institution(models.Model):
     id = models.AutoField(primary_key=True, null=False, blank=False, unique=True)
     nome = models.CharField(max_length=100, null=False, blank=False)
-    cnpj = models.CharField(max_length=14, null=False, blank=False, unique=True)
+    cnpj = models.CharField(max_length=18, null=False, blank=False, unique=True)
+    email = models.EmailField(max_length=254, null=False, blank=False, unique=True, default='default@mail.com')
     contato = models.CharField(max_length=50, null=False, blank=False)
     endereco = models.CharField(max_length=255, null=True, blank=True)
     descricao = models.CharField(max_length=1000, null=False, blank=False)
     fotoPerfil = models.ImageField(upload_to='institution', default='default.jpg')
     slug = models.SlugField(blank=True, unique=True)
     checked = models.BooleanField(default=False)
+    logged = models.BooleanField(default=False)
+    password = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         return self.nome

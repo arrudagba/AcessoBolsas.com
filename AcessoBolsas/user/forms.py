@@ -1,5 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
+from django.contrib.auth import authenticate
 from user.models import User
 
 
@@ -35,3 +36,18 @@ class UserUpdateForm(forms.ModelForm):
             except User.DoesNotExist:
                 return username
             raise forms.ValidationError('Username "%s" já sendo utilizado.' % username)
+        
+
+class UserAuthForm(forms.ModelForm):
+    password = forms.CharField(label='password', widget=forms.PasswordInput)
+
+    class Meta:
+        model = User
+        fields = ('username', 'password')
+    
+    def clean(self):
+        if self.is_valid():
+            username = self.cleaned_data['username']
+            password = self.cleaned_data['password']
+            if not authenticate(username=username, password=password):
+                raise forms.ValidationError('Usuário ou senha inválidos.')

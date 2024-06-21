@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from user.models import User
-from user.forms import UserRegisterForm, UserUpdateForm
+from user.forms import UserRegisterForm, UserUpdateForm, UserAuthForm
+from institution.models import Institution
 
 # Create your views here.
 
@@ -105,3 +106,40 @@ def listUsers(request):
     users = User.objects.all()
     context['users'] = users
     return render(request,'user/listUsers.html', context)
+
+def logoutUser(request):
+    logout(request)
+    messages.success(request, 'Logout feito com sucesso!')
+    return redirect("home")
+
+def loginUser(request):
+    context = {}
+
+    if request.session['institution_id'] != None or request.session['logged'] == True:
+        institution = Institution.objects.get(id=request.session['institution_id'])
+        institution.logged = False
+        request.session['logged'] = False
+        request.session['institution_id'] = None
+        institution.save()
+        
+    user = request.user
+    if user.is_authenticated:
+        return redirect("home")
+    
+    if request.method == 'POST':
+        form = UserAuthForm(request.POST)
+        if form.is_valid():
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(username=username, password=password)
+
+            if user:
+                login(request, user)
+                messages.success(request, 'Login feito com sucesso!')
+                return redirect("home")
+    
+    else:
+        form = UserAuthForm()
+
+    context['loginForm'] = form
+    return render(request, 'user/loginUser.html', context)

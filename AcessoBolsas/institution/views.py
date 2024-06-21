@@ -1,6 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.mail import send_mail
+from django.conf import settings
+import random
+import string
 from institution.models import Institution
 from institution.forms import InstitutionRegisterForm, InstitutionUpdateForm
 
@@ -27,6 +32,9 @@ def editInstitution(request, slug):
 
     institution = get_object_or_404(Institution, slug=slug)
 
+    if (institution.logged == False):
+        return redirect('home')
+
     if request.POST == 'POST':
         form = InstitutionUpdateForm(request.POST, request.FILES or None,
                                      instance=institution)
@@ -41,6 +49,7 @@ def editInstitution(request, slug):
         initial={
             'nome': institution.nome,
             'cnpj': institution.cnpj,
+            'email': institution.email,
             'contato': institution.contato,
             'endereco': institution.endereco,
             'descricao': institution.descricao,
@@ -62,6 +71,10 @@ def viewInstitution(request, slug):
 def deleteInstitution(request, slug):
     context = {}
     institution = get_object_or_404(Institution, slug=slug)
+
+    if (institution.logged == False):
+        return redirect('home')
+    
     if request.POST:
         institution.fotoPerfil.delete()
         institution.delete()
@@ -77,3 +90,65 @@ def listInstitutions(request):
     institutions = Institution.objects.all()
     context['institutions'] = institutions
     return render(request,'institution/listInstitutions.html', context)
+
+def generate_random_password(length=8):
+
+    characters = string.ascii_letters + string.digits
+    return ''.join(random.choice(characters) for i in range(length))
+
+def loginInstitution(request):
+    context = {}
+    logout(request)
+    
+    if request.method == 'POST':
+        cnpj = request.POST['cnpj']
+        try:
+            institution = Institution.objects.get(cnpj=cnpj)
+
+            # Generate a random password
+            password = generate_random_password()
+            institution.password = password
+            institution.save()
+
+            # Send email to institution with the generated password
+            send_mail(
+                'Sua senha de login',
+                f'Sua senha é: {password}',
+                settings.DEFAULT_FROM_EMAIL,
+                [institution.email],
+                fail_silently=False,
+            )
+            context['message'] = 'A senha foi enviada para o email cadastrado. Verifique a sua caixa de entrada no email.'
+            context['cnpj'] = cnpj
+            return render(request, 'institution/verify_password.html', context)
+        except Institution.DoesNotExist:
+            context['error'] = 'Instituição com esse CNPJ não existe.'
+    
+    return render(request, 'institution/loginInstitution.html', context)
+
+def logoutInstitution(request):
+    institution = Institution.objects.get(id=request.session['institution_id'])
+    institution.logged = False
+    request.session['logged'] = False
+    request.session['institution_id'] = None
+    institution.save()
+    return redirect('home')
+
+def verify_password(request):
+    context = {}
+
+    if request.method == 'POST':
+        cnpj = request.POST['cnpj']
+        password = request.POST['password']
+        institution = Institution.objects.get(cnpj=cnpj)
+        if password == institution.password:
+            # Password is correct, log the institution in
+            institution.logged = True
+            institution.save()
+            request.session['logged'] = True
+            request.session['institution_id'] = institution.id
+            return redirect('home')
+        else:
+            context['error'] = 'Senha incorreta. Tente novamente.'
+    
+    return render(request, 'institution/verify_password.html', context)

@@ -10,7 +10,7 @@ def createScholarship(request):
     context = {}
 
     institution = request.user
-    if not institution.checked:
+    if not institution.checked and not institution.logged:
        return redirect("loginInstitution")
     
     form = ScholarshipRegisterForm(request.POST or None, request.FILES or None)
@@ -33,7 +33,7 @@ def editScholarship(request, slug):
 
     scholarship = get_object_or_404(Scholarship, slug=slug)
     institution = scholarship.__getattribute__('instituicao')
-    if not institution.checked:
+    if not institution.checked and not institution.logged:
         return redirect("loginInstitution")
     
     if request.POST:
@@ -69,6 +69,9 @@ def viewScholarship(request, slug):
 def deleteScholarship(request, slug):
     context = {}
     scholarship = get_object_or_404(Scholarship, slug=slug)
+    institution = scholarship.__getattribute__('instituicao')
+    if not institution.checked and not institution.logged:
+        return redirect("loginInstitution")
 
     if request.POST:
         scholarship.fotoPerfil.delete()

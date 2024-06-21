@@ -19,16 +19,27 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
-#from AcessoBolsas.views import viewHome
 from AcessoBolsas.views import HomeView
 from AcessoBolsas.views import SignUp
 from AcessoBolsas.views import SignUpInstitution
 from AcessoBolsas.views import SignUpUser
+from user.views import (
+    loginUser,
+    logoutUser,
+)
+from institution.views import (
+    loginInstitution,
+    logoutInstitution,
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomeView , name='home'),
     path('user/', include('user.urls')),
+    path('login/', loginUser, name='login'),
+    path('logout/', logoutUser, name='logout'),
+    path('loginInstitution/', loginInstitution, name='loginInstitution'),
+    path('logoutInstitution/', logoutInstitution, name='logoutInstitution'),
     path('scholarship/', include('scholarship.urls')),
     path('institution/', include('institution.urls')),
     path('sign_up/', SignUp, name='sign_up'),

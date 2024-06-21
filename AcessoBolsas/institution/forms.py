@@ -4,17 +4,18 @@ from institution.models import Institution
 class InstitutionRegisterForm(forms.ModelForm):
     class Meta:
         model = Institution
-        fields = ['nome', 'cnpj', 'contato', 'endereco', 'descricao', 'fotoPerfil']
+        fields = ['nome', 'cnpj', 'email', 'contato', 'endereco', 'descricao', 'fotoPerfil']
 
 class InstitutionUpdateForm(forms.ModelForm):
     class Meta:
         model = Institution
-        fields = ['nome', 'cnpj', 'contato', 'endereco', 'descricao', 'fotoPerfil']
+        fields = ['nome', 'cnpj', 'email', 'contato', 'endereco', 'descricao', 'fotoPerfil']
 
         def save(self, commit=True):
             institution = self.instance
             institution.nome = self.cleaned_data['nome']
             institution.cnpj = self.cleaned_data['cnpj']
+            institution.email = self.cleaned_data['email']
             institution.contato = self.cleaned_data['contato']
             institution.endereco = self.cleaned_data['endereco']
             institution.descricao = self.cleaned_data['descricao']
