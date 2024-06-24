@@ -1,38 +1,10 @@
+{% extends 'base.html' %}
 {% load static %}
+
+{% block content %}
 <!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>AcessoBolsas.com</title>
-    <link href="{% static 'AcessoBolsas/css/style.css' %}" rel="stylesheet" type="text/css" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Outfit:wght@100..900&display=swap"
-        rel="stylesheet">
-</head>
 
 <body>
-    <div class="linha">
-        <div class="menu">
-            <img src="{% static 'AcessoBolsas/img/menu.png' %}" class="menu_image">
-        </div>
-    </div>
-    <div class='head_cadastro'>
-        <div class="div-logo">
-            <div class='logo'>
-                <p class="titulo">AcessoBolsas.com</p>
-                <img class="pencil_image" src="{% static 'AcessoBolsas/img/pencil.png' %}">
-            </div>
-        </div>
-    </div>
-    </div>
     <p class="voltar"><img src="{% static 'AcessoBolsas/img/seta_back.png' %}" class="img_seta" /><u>Voltar</u></p>
     <div class="div-box">
         <p class="blank1"></p>
@@ -64,9 +36,6 @@
     </div>
     <script src="{% static 'AcessoBolsas/js/script.js' %}"></script>
 
-    <footer>
-        <p>Footer</p>
-    </footer>
 </body>
 
-</html>
+{% endblock content %}
