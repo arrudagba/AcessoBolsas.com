@@ -1,11 +1,7 @@
-{% extends 'base.html' %}
-{% load static %}
-
-{% block content %}
 <!DOCTYPE html>
 
 <body>
-    <p class="voltar"><img src="{% static 'AcessoBolsas/img/seta_back.png' %}" class="img_seta" /><u>Voltar</u></p>
+    <p class="voltar"><img src="/AcessoBolsas/AcessoBolsas/static/AcessoBolsas/img/seta_back.png" class="img_seta" /><u>Voltar</u></p>
     <div class="div-box">
         <p class="blank1"></p>
         <div class="box">
@@ -16,9 +12,10 @@
                 <p class="headerInput">CNPJ: </p>
                 <input type="number" class="inputCadastro" placeholder="CNPJ:" />
 
-                <p class="headerInput">Contatos: </p>
+                <p class="headerInput">Telefone: </p>
                 <input type="tel" class="inputCadastro" placeholder="Tel:" />
-                <p class="blank2"></p>
+                
+                <p class="headerInput">E-mail: </p>
                 <input type="email" class="inputCadastro" placeholder="E-mail:" />
 
                 <p class="headerInput">Endereço: </p>
@@ -27,8 +24,6 @@
                 <p class="headerInput">Descrição sobre a Instituição: </p>
                 <textarea class="inputCadastro_text_desc"></textarea>
 
-                <p class="headerInput">Defina sua senha: </p>
-                <input type="password" class="inputCadastro" placeholder="Senha:" />
 
             </div>
         </div>
@@ -38,4 +33,3 @@
 
 </body>
 
-{% endblock content %}
