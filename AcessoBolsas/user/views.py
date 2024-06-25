@@ -115,12 +115,12 @@ def logoutUser(request):
 def loginUser(request):
     context = {}
 
-    if request.session['institution_id'] != None or request.session['logged'] == True:
-        institution = Institution.objects.get(id=request.session['institution_id'])
-        institution.logged = False
-        request.session['logged'] = False
-        request.session['institution_id'] = None
-        institution.save()
+    # if request.session['institution_id'] != None or request.session['logged'] == True:
+    #     institution = Institution.objects.get(id=request.session['institution_id'])
+    #     institution.logged = False
+    #     request.session['logged'] = False
+    #     request.session['institution_id'] = None
+    #     institution.save()
         
     user = request.user
     if user.is_authenticated:
@@ -143,3 +143,9 @@ def loginUser(request):
 
     context['loginForm'] = form
     return render(request, 'user/loginUser.html', context)
+
+def myAccountUser(request, username):
+    context = {}
+    user = get_object_or_404(User, username=username)
+    context['user'] = user
+    return render(request,'user/viewUser.html', context)

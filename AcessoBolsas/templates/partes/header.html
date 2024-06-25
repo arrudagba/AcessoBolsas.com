@@ -33,12 +33,26 @@
                 <p>Bolsas em destaque</p>
             </div>
 
-            <p class="sair">Sair</p>
+            <p class="sair" >Sair</p>
         </div>
+
+        {% if request.user.is_authenticated %}
+            <a class="d-flex align-items-center text-white text-decoration-none" style="margin-left: 800px;">
+            Bem-Vindo, {{request.user.username}}! |
+            </a>
+        {% endif %}
+        
+        {% if request.user.is_authenticated %}
         <div class='buttons'>
-            <button class='btn1'>Sign In</button>
-            <button onclick="location.href='{% url 'sign_up' %}'" class='btn1'>Sign Up</button>
+            <button onclick="location.href='{% url 'logout' %}'" class='btn1'>Logout</button>
+            <button onclick="location.href='{% url 'my_account' username=request.user.username %}'" class='btn1'>Minha Conta</button>
         </div>
+        {% else %}
+            <div class='buttons'>
+                <button onclick="location.href='{% url 'sign_in' %}'" class='btn1'>Sign In</button>
+                <button onclick="location.href='{% url 'sign_up' %}'" class='btn1'>Sign Up</button>
+            </div>
+        {% endif %}
     </div>
     <div class='head'>
         <div class="div-logo">

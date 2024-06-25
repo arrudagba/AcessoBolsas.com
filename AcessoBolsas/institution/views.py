@@ -21,6 +21,8 @@ def createInstitution(request):
         institution.save()
         form = InstitutionRegisterForm()
         messages.success(request, 'Instituição cadastrada com sucesso!')
+        request.session['logged'] = False
+        request.session['institution_id'] = None
         return redirect('home')
     
     context['form'] = form

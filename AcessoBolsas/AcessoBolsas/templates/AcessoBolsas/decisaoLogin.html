@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+
+
+<body>
+    
+    <p class="voltar"><img src="{% static 'AcessoBolsas/img/seta_back.png' %}" class="img_seta" /><u>Voltar</u></p>
+
+    <div class="div-box-decisao">
+        <p class="text-cadastro">Login:</p>
+        <p class="blank1"></p>
+        <div class="box-decisao">
+            <div class="botoes-cadastro">
+                <button onclick="location.href='{% url 'loginInstitution' %}'" class="button-inst">Instituição</button>
+                <button onclick="location.href='{% url 'login' %}'" class="button-usu">Usuário</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'AcessoBolsas/js/script.js' %}"></script>
+
+</body>
+
+
+{% endblock content %}

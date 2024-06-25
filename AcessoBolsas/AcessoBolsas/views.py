@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
+from scholarship.models import Scholarship
+from operator import attrgetter
 
 """ class HomeView(TemplateView):
     template = 'AcessoBolsas/index.html' """
@@ -7,7 +9,8 @@ from django.views.generic import TemplateView
     
 def HomeView(request):
     context = {}
-    
+    scholarship = sorted(Scholarship.objects.all(), key=attrgetter('titulo'), reverse=True)
+    context['scholarships'] = scholarship
     return render(request, 'AcessoBolsas/index.html', context)
 
 def SignUp(request):
@@ -15,13 +18,8 @@ def SignUp(request):
     
     return render(request, 'AcessoBolsas/decisaoCadastro.html', context)
 
-def SignUpInstitution(request):
+def SignIn(request):
     context = {}
-    
-    return render(request, 'AcessoBolsas/cadastroInst.html', context)
 
-def SignUpUser(request):
-    context = {}
-    
-    return render(request, 'AcessoBolsas/cadastroUsuario.html', context)
+    return render(request, 'AcessoBolsas/decisaoLogin.html', context)
 

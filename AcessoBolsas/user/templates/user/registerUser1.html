@@ -1,0 +1,60 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title> Registrar Usuário </title>
+    </head>
+    <body>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="id_username" class="form-label">Username</label>
+                <input type="text" name="username" class="form-control" id="id_username" placeholder="Username" required autofocus>
+            </div>
+            <div class="mb-3">
+                <label for="id_email" class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" id="id_email" placeholder="Email" required>
+            </div>
+            <div class='mb-3 form-group'>
+                <label for='id_nome' class='form-label'>Nome</label>
+                <input type='text' name='nome' class='form-control' id='id_nome' placeholder='Nome' required>
+            </div>
+            <div class="mb-3">
+                <label for="id_password1" class="form-label">Senha</label>
+                <input type="password" name="password1" class="form-control" id="id_password1" placeholder="Senha" required>
+            </div>
+            <div class="mb-3">
+                <label for="id_password2" class="form-label">Confirmação da senha</label>
+                <input type="password" name="password2" class="form-control" id="id_password2" placeholder="Confirmação da senha" required>
+            </div>
+            <div class="mb-3">
+                <label for="id_telefone" class="form-label">Telefone</label>
+                <input type="text" name="telefone" class="form-control" id="id_telefone" placeholder="Telefone">
+            </div>
+            <div class="mb-3">
+                <label for="id_dataNascimento" class="form-label">Data de Nascimento</label>
+                <input type="date" name="dataNascimento" class="form-control" id="id_dataNascimento" placeholder="Telefone">
+            </div>
+            <div class="mb-3">
+                <label for="id_sexo" class="form-label">Sexo</label>
+                <input type="text" name="sexo" class="form-control" id="id_sexo" placeholder="Sexo">
+            </div>
+            {% for field in registrationForm %}
+            <p>
+                {% for error in field.errors %}
+                <p style="color: red;">{{ error }}</p>
+                {% endfor %}
+            </p>
+            {% endfor %}
+            {% if registrationForm.non_field_errors %}
+            <div style="color: red;">
+                <p>{{ registrationForm.non_field_errors }}</p>
+            </div>
+            {% endif %}
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Registrar</button>
+            </div>
+        </form>
+    </body>
+</html>

@@ -21,30 +21,34 @@ from django.urls import path
 from django.urls.conf import include
 from AcessoBolsas.views import HomeView
 from AcessoBolsas.views import SignUp
-from AcessoBolsas.views import SignUpInstitution
-from AcessoBolsas.views import SignUpUser
+from AcessoBolsas.views import SignIn
 from user.views import (
     loginUser,
     logoutUser,
+    registerUser,
+    myAccountUser,
 )
 from institution.views import (
     loginInstitution,
     logoutInstitution,
+    createInstitution
 )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomeView , name='home'),
     path('user/', include('user.urls')),
+    path('/<username>/my_account/', myAccountUser, name='my_account'),
     path('login/', loginUser, name='login'),
     path('logout/', logoutUser, name='logout'),
     path('loginInstitution/', loginInstitution, name='loginInstitution'),
     path('logoutInstitution/', logoutInstitution, name='logoutInstitution'),
     path('scholarship/', include('scholarship.urls')),
     path('institution/', include('institution.urls')),
+    path('sign_in/', SignIn, name='sign_in'),
     path('sign_up/', SignUp, name='sign_up'),
-    path('sign_up/institution/', SignUpInstitution, name='sign_up_institution'),
-    path('sign_up/user/', SignUpUser, name='sign_up_user'),
+    path('sign_up/institution/', createInstitution, name='sign_up_institution'),
+    path('sign_up/user/', registerUser, name='sign_up_user'),
 ]
 
 if settings.DEBUG:
