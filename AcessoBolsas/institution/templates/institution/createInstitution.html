@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 
 <body>
-    <p class="voltar"><img src="/AcessoBolsas/AcessoBolsas/static/AcessoBolsas/img/seta_back.png" class="img_seta" /><u>Voltar</u></p>
+    <p class="voltar"><img src="{% static '\institution\img\seta_back.png' %}" class="img_seta" /><u>Voltar</u></p>
     <div class="div-box">
         <p class="blank1"></p>
         <div class="box">
@@ -29,13 +29,22 @@
 
                     <p class="headerInput">Descrição sobre a Instituição: </p>
                     <textarea class="inputCadastro_text_desc" name="descricao"></textarea>
-
-                    <div class='text-center'>
-                        <button type='submit' class="cadastre-se">Cadastre-se</button>
-                    </div>
                 </form>
             </div>
         </div>
+        {% comment %} {% for field in registrationForm %}
+        <p>
+            {% for error in field.errors %}
+            <p style="color: red;">{{ error }}</p>
+            {% endfor %}
+        </p>
+        {% endfor %}
+        {% if registrationForm.non_field_errors %}
+        <div style="color: red;">
+            <p>{{ registrationForm.non_field_errors }}</p>
+        </div>
+        {% endif %} {% endcomment %}
+        <button class="cadastre-se">Cadastre-se</button>
     </div>
     <script src="{% static 'AcessoBolsas/js/script.js' %}"></script>
 

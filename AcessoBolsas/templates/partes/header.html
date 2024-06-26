@@ -27,13 +27,13 @@
             </div>
 
             <div class="textos">
-                <p>Inicio</p>
-                <p>Perfil</p>
-                <p>Acompanhar inscrições</p>
-                <p>Bolsas em destaque</p>
+                <p>wedwed</p>
+                <p class="clickable" onclick="location.href='{% url 'home' %}'">Inicio</p>
+                {% comment %} <p class="clickable" onclick="location.href='{% url 'my_account' username=request.user.username %}'">Perfil</p> {% endcomment %}
+                <p class="clickable" >Acompanhar inscrições</p>
             </div>
 
-            <p class="sair" >Sair</p>
+            <p class="sair">Sair</p>
         </div>
 
         {% if request.user.is_authenticated %}

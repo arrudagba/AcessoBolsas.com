@@ -168,11 +168,15 @@ input::placeholder {
 
 /* cadastro inst ---------------------------------------------------------------------------------------------------------------------- */
 
+.text-center{
+    margin-top: 20px;
+}
+
 .box {
     display: flex;
     width: 400px;
-    position: relative;
-    height: 700px;
+    /* position: relative; */
+    /* height: 700px; */
     background-color: rgb(255, 249, 236);
     align-items: center;
     border-radius: 40px;
@@ -181,6 +185,7 @@ input::placeholder {
     box-shadow: 0 4px rgb(187, 186, 186);
 
 }
+
 
 .inputCadastro {
     border: none;
@@ -203,7 +208,8 @@ input::placeholder {
     outline: none;
     border-radius: 20px;
     font-family: Inter;
-    text-align: center
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .blank1 {
@@ -384,14 +390,15 @@ input[type="date"] {
 .box_cadastro_usu {
     display: flex;
     width: 400px;
-    position: relative;
-    height: 600px;
+    /* position: relative; */
+    /* height: 900px; */
     background-color: rgb(255, 249, 236);
     align-items: center;
     border-radius: 40px;
     margin: auto;
     margin-bottom: 30px;
     box-shadow: 0 4px rgb(187, 186, 186);
+    padding-bottom: 50px;
 
 }
 
@@ -416,13 +423,14 @@ input[type="date"] {
     align-items: center;
     margin: auto;
     margin-bottom: 30px;
+    margin-top: 10px;
 }
 
 
 
 
 
-/* css  pos ----------------------------------------------------------------------------- */
+/* css  post ----------------------------------------------------------------------------- */
 
 
 
@@ -733,9 +741,10 @@ input[type="date"] {
     margin-left: 15px;
 }
 
-.textos p {
+.textos p.clickable {
     position: relative; 
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
+    cursor: pointer;
 }
 
 .textos p::after {
