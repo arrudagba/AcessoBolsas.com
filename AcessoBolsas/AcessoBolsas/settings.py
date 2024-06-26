@@ -65,6 +65,8 @@ TEMPLATES = [
 
 AUTH_USER_MODEL = 'user.User'
 
+SESSION_COOKIE_AGE = 315576000
+
 WSGI_APPLICATION = 'AcessoBolsas.wsgi.application'
 
 # Database

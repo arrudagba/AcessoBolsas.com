@@ -38,7 +38,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomeView , name='home'),
     path('user/', include('user.urls')),
-    path('/<username>/my_account/', myAccountUser, name='my_account'),
+    path('<username>/my_account/', myAccountUser, name='my_account'),
     path('login/', loginUser, name='login'),
     path('logout/', logoutUser, name='logout'),
     path('loginInstitution/', loginInstitution, name='loginInstitution'),

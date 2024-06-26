@@ -6,11 +6,13 @@ from django.core.mail import send_mail
 from django.conf import settings
 import random
 import string
+from django.views.decorators.csrf import csrf_protect
 from institution.models import Institution
 from institution.forms import InstitutionRegisterForm, InstitutionUpdateForm
 
 # Create your views here.
 
+@csrf_protect
 def createInstitution(request):
     context = {}
 

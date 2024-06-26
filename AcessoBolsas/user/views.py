@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
+from django.views.decorators.csrf import csrf_protect
 from user.models import User
 from user.forms import UserRegisterForm, UserUpdateForm, UserAuthForm
 from institution.models import Institution
 
 # Create your views here.
 
+@csrf_protect
 def registerUser(request):
     context = {}
 

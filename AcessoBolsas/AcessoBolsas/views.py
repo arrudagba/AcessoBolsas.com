@@ -10,6 +10,7 @@ from operator import attrgetter
 def HomeView(request):
     context = {}
     scholarship = sorted(Scholarship.objects.all(), key=attrgetter('titulo'), reverse=True)
+    request.session['logged'] = None
     context['scholarships'] = scholarship
     return render(request, 'AcessoBolsas/index.html', context)
 
