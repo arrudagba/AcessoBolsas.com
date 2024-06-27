@@ -90,17 +90,8 @@ footer {
 }
 
 
-.input-img {
-    width: 30px;
-    padding: 10px;
-    padding-top: 15px;
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
 .input {
     display: flex;
-    flex: 1;
     width: 100%;
     position: relative;
     height: 50px;
@@ -109,7 +100,20 @@ footer {
     margin-top: 50px;
     align-items: center;
     box-shadow: 0 4px rgb(187, 186, 186);
+}
 
+.input form {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.input-img {
+    width: 30px;
+    padding: 10px;
+    padding-top: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .input-pesquisa {
@@ -128,9 +132,7 @@ input::placeholder {
     color: rgb(187, 186, 186);
     font-style: italic;
     font-family: Inter;
-
 }
-
 
 .text-recomendacoes {
     font-size: 24px;
@@ -426,6 +428,95 @@ input[type="date"] {
     margin-top: 10px;
 }
 
+/* css view institution */
+
+
+.usuário{
+    display: grid;
+    grid-template-rows: auto;
+    row-gap: 40px;
+    align-items: center;
+    margin-top: 90px;
+    margin-left: 20%;
+    margin-right: 20%;
+    flex: 1;
+    
+}
+
+.pfp{
+    margin: auto;
+
+}
+
+.user_image{
+    height: 250px;
+}
+
+.textos_instituicao{
+    font-family: Inter;
+    font-size: 25px;
+    font-weight: bold;
+    color: rgb(64, 91, 188);
+}
+
+
+.botões {
+    display: grid;
+    grid-template-columns: repeat(3, auto); 
+    column-gap: 70px; 
+    align-items: center;
+    margin-top: 90px;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-bottom: 20px;
+    flex: 1;
+}
+
+.botão_editar, .botão_ver_bolsas, .botão_deletar {
+    color: white;
+    padding: 15px 60px; 
+    border: none;
+    border-radius: 10px;
+}
+
+.botão_editar {
+    background-color: rgb(63, 170, 93);
+}
+
+.botão_ver_bolsas {
+    background-color: rgb(49, 37, 192);
+}
+
+.botão_deletar {
+    background-color: rgb(218, 13, 13);
+}
+
+.botão_editar:hover{
+    background-color: rgb(51, 137, 76);
+    cursor: pointer;
+}
+
+.botão_editar:active{
+    background-color: rgb(33, 104, 53);
+}
+
+.botão_ver_bolsas:hover{
+    background-color: rgb(42, 31, 158);
+    cursor: pointer;
+}
+
+.botão_ver_bolsas:active{
+    background-color: rgb(32, 23, 134);
+}
+
+.botão_deletar:hover{
+    background-color: rgb(170, 15, 15);
+    cursor: pointer;
+}
+
+.botão_deletar:active{
+    background-color: rgb(150, 9, 9);
+}
 
 
 

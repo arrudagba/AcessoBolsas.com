@@ -9,20 +9,18 @@ from operator import attrgetter
     
     
 def HomeView(request):
-    context = {}
-    scholarship = sorted(Scholarship.objects.all(), key=attrgetter('titulo'), reverse=True)
-    institutionLogged = request.COOKIES.get('logged')
-    if institutionLogged is None:
-        context['institutionLogged'] = None
-        print("institutionLogged = None")
+    query = request.GET.get('q')
+    if query:
+        scholarships = Scholarship.objects.filter(titulo__icontains=query)
     else:
-        if institutionLogged == 'True':
-            context['institutionLogged'] = True
-            print("institutionLogged = True")
-        else:
-            context['institutionLogged'] = False
-            print("institutionLogged = False")
-    context['scholarships'] = scholarship
+        scholarships = sorted(Scholarship.objects.all(), key=attrgetter('titulo'), reverse=True)
+    
+    institutionLogged = request.COOKIES.get('logged')
+    context = {
+        'scholarships': scholarships,
+        'institutionLogged': institutionLogged == 'True' if institutionLogged else None
+    }
+
     return render(request, 'AcessoBolsas/index.html', context)
 
 def SignUp(request):
