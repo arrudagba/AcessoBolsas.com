@@ -74,9 +74,11 @@
                 <p class="titulo">AcessoBolsas.com</p>
                 <img class="pencil_image" src="{% static 'AcessoBolsas/img/pencil.png' %}">
                 <div class="input">
-                    <span><img src=" {% static 'AcessoBolsas/img\lupa.png' %}" class="input-img"></span>
-                    <input class="input-pesquisa" type="text" placeholder="Search...">
-                    <span><img src="{% static 'AcessoBolsas/img\filtro.png' %}" class="input-img"></span>
+                    <form method="GET" action="{% url 'home' %}">
+                        <span><img src="{% static 'AcessoBolsas/img/lupa.png' %}" class="input-img" onclick="this.closest('form').submit();"></span>
+                        <input class="input-pesquisa" type="text" name="q" placeholder="Search..." value="{{ request.GET.q }}">
+                        <span><img src="{% static 'AcessoBolsas/img/filtro.png' %}" class="input-img"></span>
+                    </form>
                 </div>
             </div>
         </div>

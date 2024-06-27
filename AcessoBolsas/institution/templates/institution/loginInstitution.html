@@ -1,8 +1,9 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Login Institution</title>
-</head>
+
 <body>
     <h2>Login Institution</h2>
     {% if message %}
@@ -26,4 +27,7 @@
         </form>
     {% endif %}
 </body>
-</html>
+
+
+
+{% endblock content %}

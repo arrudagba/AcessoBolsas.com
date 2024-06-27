@@ -130,5 +130,5 @@ EMAIL_HOST = 'smtp.gmail.com'  # Altere para o servidor SMTP que você está usa
 EMAIL_PORT = 587  # Ou 465 para SSL
 EMAIL_USE_TLS = True  # Ou False se você estiver usando SSL
 EMAIL_HOST_USER = 'lucascaputobello@gmail.com'
-EMAIL_HOST_PASSWORD = '22120507Lcb'
+EMAIL_HOST_PASSWORD = ''
 DEFAULT_FROM_EMAIL = 'lucascaputobello@gmail.com'
