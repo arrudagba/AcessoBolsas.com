@@ -29,8 +29,12 @@
             <div class="textos">
                 <p>wedwed</p>
                 <p class="clickable" onclick="location.href='{% url 'home' %}'">Inicio</p>
-                {% comment %} <p class="clickable" onclick="location.href='{% url 'my_account' username=request.user.username %}'">Perfil</p> {% endcomment %}
+                {% if request.user.is_authenticated %}
+                <p class="clickable" onclick="location.href='{% url 'my_account' username=request.user.username %}'">Perfil</p>
+                {% endif %}
+                {% if request.user.is_authenticated %}
                 <p class="clickable" >Acompanhar inscrições</p>
+                {% endif %}
             </div>
 
             <p class="sair">Sair</p>
