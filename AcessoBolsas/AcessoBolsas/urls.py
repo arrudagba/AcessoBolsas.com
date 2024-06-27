@@ -31,7 +31,7 @@ from user.views import (
 from institution.views import (
     loginInstitution,
     logoutInstitution,
-    createInstitution
+    createInstitution,
 )
 
 urlpatterns = [

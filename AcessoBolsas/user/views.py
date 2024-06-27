@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
+from django.http import HttpResponse
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_protect
 from user.models import User
@@ -117,12 +118,13 @@ def logoutUser(request):
 def loginUser(request):
     context = {}
 
-    # if request.session['institution_id'] != None or request.session['logged'] == True:
-    #     institution = Institution.objects.get(id=request.session['institution_id'])
-    #     institution.logged = False
-    #     request.session['logged'] = False
-    #     request.session['institution_id'] = None
-    #     institution.save()
+    response = redirect('home')
+    if request.COOKIES.get('logged') == True:
+        institution = Institution.objects.get(id=request.COOKIES.get('institution_id'))
+        institution.logged = False
+        response.set_cookie('logged', False)
+        response.set_cookie('institution_id', None)
+        institution.save()
         
     user = request.user
     if user.is_authenticated:
@@ -138,7 +140,7 @@ def loginUser(request):
             if user:
                 login(request, user)
                 messages.success(request, 'Login feito com sucesso!')
-                return redirect("home")
+                return response
     
     else:
         form = UserAuthForm()

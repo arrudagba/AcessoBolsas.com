@@ -45,9 +45,9 @@ class AdminMyAccount(BaseUserManager):
 
 class User(AbstractBaseUser):
     SEXO_CHOICES = (
-        ('M', 'Masculino'),
-        ('F', 'Feminino'),
-        ('O', 'Outro'),
+        ('Masculino', 'Masculino'),
+        ('Feminino', 'Feminino'),
+        ('Outro', 'Outro'),
     )
 
     id = models.AutoField(primary_key=True, null=False, blank=False, unique=True)
@@ -62,7 +62,7 @@ class User(AbstractBaseUser):
 
     dataNascimento = models.DateField(help_text='Informe a data de nascimento', null=True, blank=True)
 
-    sexo = models.CharField(help_text='Informe o sexo', max_length=1, null=True, blank=True, choices=SEXO_CHOICES)
+    sexo = models.CharField(help_text='Informe o sexo', max_length=9, null=True, blank=True, choices=SEXO_CHOICES)
 
     fotoPerfil = models.ImageField(upload_to='perfil_usuario', default='default.jpg', null=True, blank=True)
 
