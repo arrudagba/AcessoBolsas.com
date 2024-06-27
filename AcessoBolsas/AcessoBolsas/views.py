@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from scholarship.models import Scholarship
+from django.http import HttpResponse
 from operator import attrgetter
 
 """ class HomeView(TemplateView):
@@ -10,7 +11,17 @@ from operator import attrgetter
 def HomeView(request):
     context = {}
     scholarship = sorted(Scholarship.objects.all(), key=attrgetter('titulo'), reverse=True)
-    request.session['logged'] = None
+    institutionLogged = request.COOKIES.get('logged')
+    if institutionLogged is None:
+        context['institutionLogged'] = None
+        print("institutionLogged = None")
+    else:
+        if institutionLogged == 'True':
+            context['institutionLogged'] = True
+            print("institutionLogged = True")
+        else:
+            context['institutionLogged'] = False
+            print("institutionLogged = False")
     context['scholarships'] = scholarship
     return render(request, 'AcessoBolsas/index.html', context)
 

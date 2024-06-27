@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
 import random
+import logging
 import string
 from django.views.decorators.csrf import csrf_protect
 from institution.models import Institution
@@ -23,8 +25,6 @@ def createInstitution(request):
         institution.save()
         form = InstitutionRegisterForm()
         messages.success(request, 'Instituição cadastrada com sucesso!')
-        request.session['logged'] = False
-        request.session['institution_id'] = None
         return redirect('home')
     
     context['form'] = form
@@ -100,59 +100,65 @@ def generate_random_password(length=8):
     characters = string.ascii_letters + string.digits
     return ''.join(random.choice(characters) for i in range(length))
 
+logger = logging.getLogger(__name__)
+
 def loginInstitution(request):
     context = {}
-    logout(request)
-    
+
     if request.method == 'POST':
-        cnpj = request.POST['cnpj']
-        try:
-            institution = Institution.objects.get(cnpj=cnpj)
+        cnpj = request.POST.get('cnpj')
+        password = request.POST.get('password', None)
 
-            # Generate a random password
-            password = generate_random_password()
-            institution.password = password
-            institution.save()
+        if password:
+            # Etapa de verificação de senha
+            try:
+                institution = Institution.objects.get(cnpj=cnpj)
+                if password == institution.password:
+                    logout(request)
+                    institution.logged = True
+                    institution.save()
+                    response = redirect('home')
+                    response.set_cookie('logged', True)
+                    response.set_cookie('institution_id', institution.id)
+                    return response
+                else:
+                    context['error'] = 'Senha incorreta. Tente novamente.'
+                    context['cnpj'] = cnpj
+            except Institution.DoesNotExist:
+                context['error'] = 'Instituição com esse CNPJ não existe.'
+        else:
+            # Etapa de envio de senha
+            try:
+                institution = Institution.objects.get(cnpj=cnpj)
 
-            # Send email to institution with the generated password
-            send_mail(
-                'Sua senha de login',
-                f'Sua senha é: {password}',
-                settings.DEFAULT_FROM_EMAIL,
-                [institution.email],
-                fail_silently=False,
-            )
-            context['message'] = 'A senha foi enviada para o email cadastrado. Verifique a sua caixa de entrada no email.'
-            context['cnpj'] = cnpj
-            return render(request, 'institution/verify_password.html', context)
-        except Institution.DoesNotExist:
-            context['error'] = 'Instituição com esse CNPJ não existe.'
-    
+                # Gerar uma senha aleatória
+                password = generate_random_password()
+                institution.password = password
+                institution.save()
+
+                # Enviar email para a instituição com a senha gerada
+                send_mail(
+                    'Sua senha de login',
+                    f'Sua senha é: {password}',
+                    settings.DEFAULT_FROM_EMAIL,
+                    [institution.email],
+                    fail_silently=False,
+                )
+                context['message'] = 'A senha foi enviada para o email cadastrado. Verifique a sua caixa de entrada no email.'
+                context['cnpj'] = cnpj
+            except Institution.DoesNotExist:
+                context['error'] = 'Instituição com esse CNPJ não existe.'
+            except Exception as e:
+                logger.error(f'Erro ao enviar e-mail: {e}')
+                context['error'] = f'Erro ao enviar e-mail: {e}'
+
     return render(request, 'institution/loginInstitution.html', context)
 
 def logoutInstitution(request):
-    institution = Institution.objects.get(id=request.session['institution_id'])
+    institution = Institution.objects.get(id=request.COOKIES.get('institution_id'))
     institution.logged = False
-    request.session['logged'] = False
-    request.session['institution_id'] = None
     institution.save()
-    return redirect('home')
-
-def verify_password(request):
-    context = {}
-
-    if request.method == 'POST':
-        cnpj = request.POST['cnpj']
-        password = request.POST['password']
-        institution = Institution.objects.get(cnpj=cnpj)
-        if password == institution.password:
-            # Password is correct, log the institution in
-            institution.logged = True
-            institution.save()
-            request.session['logged'] = True
-            request.session['institution_id'] = institution.id
-            return redirect('home')
-        else:
-            context['error'] = 'Senha incorreta. Tente novamente.'
-    
-    return render(request, 'institution/verify_password.html', context)
+    response = redirect('home')
+    response.set_cookie('logged', False)
+    response.set_cookie('institution_id', None)
+    return response
