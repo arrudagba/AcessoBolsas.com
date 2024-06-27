@@ -30,11 +30,11 @@
                 <p>wedwed</p>
                 <p class="clickable" onclick="location.href='{% url 'home' %}'">Inicio</p>
                 {% if request.user.is_authenticated %}
-                <p class="clickable" onclick="location.href='{% url 'my_account' username=request.user.username %}'">Perfil</p>
-                <p class="clickable" >Acompanhar inscrições</p>
+                    <p class="clickable" onclick="location.href='{% url 'my_account' username=request.user.username %}'">Perfil</p>
+                    <p class="clickable" >Acompanhar inscrições</p>
                 {% elif institutionLogged %}
-                <p class="clickable" onclick="location.href='{% url 'my_account_institution' slugInstitution=slugInstitution %}'">Perfil</p>
-                <p class="clickable" >Bolsas cadastradas</p>
+                    <p class="clickable" onclick="location.href='{% url 'my_account_institution' slugInstitution=slugInstitution %}'">Perfil</p>
+                    <p class="clickable" >Bolsas cadastradas</p>
                 {% endif %}
             </div>
 
