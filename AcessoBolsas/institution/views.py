@@ -119,7 +119,8 @@ def loginInstitution(request):
                     institution.save()
                     response = redirect('home')
                     response.set_cookie('logged', True)
-                    response.set_cookie('institution_id', institution.id)
+                    response.set_cookie('slugInstitution', institution.slug)
+                    response.set_cookie('nameInstitution', institution.nome)
                     return response
                 else:
                     context['error'] = 'Senha incorreta. Tente novamente.'
@@ -155,10 +156,17 @@ def loginInstitution(request):
     return render(request, 'institution/loginInstitution.html', context)
 
 def logoutInstitution(request):
-    institution = Institution.objects.get(id=request.COOKIES.get('institution_id'))
+    institution = Institution.objects.get(slug=request.COOKIES.get('slugInstitution'))
     institution.logged = False
     institution.save()
     response = redirect('home')
     response.set_cookie('logged', False)
-    response.set_cookie('institution_id', None)
+    response.set_cookie('slugInstitution', None)
+    response.set_cookie('nameInstitution', None)
     return response
+
+def myAccountInstitution(request, slugInstitution):
+    context = {}
+    institution = get_object_or_404(Institution, slug=slugInstitution)
+    context['institution'] = institution
+    return render(request,'institution/viewInstitution.html', context)

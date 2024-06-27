@@ -120,10 +120,11 @@ def loginUser(request):
 
     response = redirect('home')
     if request.COOKIES.get('logged') == True:
-        institution = Institution.objects.get(id=request.COOKIES.get('institution_id'))
+        institution = Institution.objects.get(id=request.COOKIES.get('slug'))
         institution.logged = False
         response.set_cookie('logged', False)
-        response.set_cookie('institution_id', None)
+        response.set_cookie('slugInstitution', None)
+        response.set_cookie('nameInstitution', None)
         institution.save()
         
     user = request.user
