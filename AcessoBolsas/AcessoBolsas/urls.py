@@ -32,6 +32,7 @@ from institution.views import (
     loginInstitution,
     logoutInstitution,
     createInstitution,
+    myAccountInstitution,
 )
 
 urlpatterns = [
@@ -39,6 +40,7 @@ urlpatterns = [
     path('', HomeView , name='home'),
     path('user/', include('user.urls')),
     path('<username>/my_account/', myAccountUser, name='my_account'),
+    path('<slugInstitution>/my_account_institution/', myAccountInstitution, name='my_account_institution'),
     path('login/', loginUser, name='login'),
     path('logout/', logoutUser, name='logout'),
     path('loginInstitution/', loginInstitution, name='loginInstitution'),

@@ -18,6 +18,8 @@ def HomeView(request):
     else:
         if institutionLogged == 'True':
             context['institutionLogged'] = True
+            context['slugInstitution'] = request.COOKIES.get('slugInstitution')
+            context['nameInstitution'] = request.COOKIES.get('nameInstitution')
             print("institutionLogged = True")
         else:
             context['institutionLogged'] = False
