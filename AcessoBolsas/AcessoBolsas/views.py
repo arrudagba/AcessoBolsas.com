@@ -10,6 +10,7 @@ from operator import attrgetter
     
 def HomeView(request):
     context = {}
+    
     query = request.GET.get('q')
     if query:
         scholarships = Scholarship.objects.filter(titulo__icontains=query)
@@ -19,6 +20,7 @@ def HomeView(request):
     institutionLogged = request.COOKIES.get('logged')
     if institutionLogged is None:
         context['institutionLogged'] = None
+        
         print("institutionLogged = None")
     else:
         if institutionLogged == 'True':
