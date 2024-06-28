@@ -35,11 +35,17 @@ def HomeView(request):
 
 def SignUp(request):
     context = {}
+    context['slugInstitution'] = request.COOKIES.get('slugInstitution')
+    context['nameInstitution'] = request.COOKIES.get('nameInstitution')
+    context['institutionLogged'] = request.COOKIES.get('logged')
     
     return render(request, 'AcessoBolsas/decisaoCadastro.html', context)
 
 def SignIn(request):
     context = {}
+    context['slugInstitution'] = request.COOKIES.get('slugInstitution')
+    context['nameInstitution'] = request.COOKIES.get('nameInstitution')
+    context['institutionLogged'] = request.COOKIES.get('logged')
 
     return render(request, 'AcessoBolsas/decisaoLogin.html', context)
 

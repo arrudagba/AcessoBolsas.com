@@ -8,7 +8,7 @@ SLUG_LIST = []
 
 class Institution(models.Model):
     id = models.AutoField(primary_key=True, null=False, blank=False, unique=True)
-    nome = models.CharField(max_length=100, null=False, blank=False)
+    nome = models.CharField(max_length=100, null=False, blank=False, unique=True)
     cnpj = models.CharField(max_length=18, null=False, blank=False, unique=True)
     email = models.EmailField(max_length=254, null=False, blank=False, unique=True, default='default@mail.com')
     contato = models.CharField(max_length=50, null=False, blank=False)

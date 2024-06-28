@@ -12,6 +12,9 @@ from institution.models import Institution
 @csrf_protect
 def registerUser(request):
     context = {}
+    context['slugInstitution'] = request.COOKIES.get('slugInstitution')
+    context['nameInstitution'] = request.COOKIES.get('nameInstitution')
+    context['institutionLogged'] = request.COOKIES.get('logged')
 
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
@@ -43,6 +46,9 @@ def editUser(request, slug):
         return redirect("login")
 
     context = {}
+    context['slugInstitution'] = request.COOKIES.get('slugInstitution')
+    context['nameInstitution'] = request.COOKIES.get('nameInstitution')
+    context['institutionLogged'] = request.COOKIES.get('logged')
 
     user = get_object_or_404(User, slug=slug)
 
@@ -82,6 +88,9 @@ def deleteUser(request, slug):
         return redirect("login")
     
     context = {}
+    context['slugInstitution'] = request.COOKIES.get('slugInstitution')
+    context['nameInstitution'] = request.COOKIES.get('nameInstitution')
+    context['institutionLogged'] = request.COOKIES.get('logged')
 
     if request.method == 'POST':
         username = request.POST['username']
@@ -100,12 +109,18 @@ def deleteUser(request, slug):
 
 def viewUser(request, slug):
     context = {}
+    context['slugInstitution'] = request.COOKIES.get('slugInstitution')
+    context['nameInstitution'] = request.COOKIES.get('nameInstitution')
+    context['institutionLogged'] = request.COOKIES.get('logged')
     user = get_object_or_404(User, slug=slug)
     context['user'] = user
     return render(request, 'user/viewUser.html', context)
 
 def listUsers(request):
     context = {}
+    context['slugInstitution'] = request.COOKIES.get('slugInstitution')
+    context['nameInstitution'] = request.COOKIES.get('nameInstitution')
+    context['institutionLogged'] = request.COOKIES.get('logged')
     users = User.objects.all()
     context['users'] = users
     return render(request,'user/listUsers.html', context)
@@ -117,7 +132,10 @@ def logoutUser(request):
 
 def loginUser(request):
     context = {}
-
+    context['slugInstitution'] = request.COOKIES.get('slugInstitution')
+    context['nameInstitution'] = request.COOKIES.get('nameInstitution')
+    context['institutionLogged'] = request.COOKIES.get('logged')
+    
     response = redirect('home')
     if request.COOKIES.get('logged') == True:
         institution = Institution.objects.get(id=request.COOKIES.get('slug'))
@@ -151,6 +169,10 @@ def loginUser(request):
 
 def myAccountUser(request, username):
     context = {}
+    context['slugInstitution'] = request.COOKIES.get('slugInstitution')
+    context['nameInstitution'] = request.COOKIES.get('nameInstitution')
+    context['institutionLogged'] = request.COOKIES.get('logged')
+    
     user = get_object_or_404(User, username=username)
     context['user'] = user
     return render(request,'user/viewUser.html', context)

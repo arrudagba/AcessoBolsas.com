@@ -27,3 +27,30 @@ class InstitutionUpdateForm(forms.ModelForm):
                 institution.save()
 
             return institution
+    
+        def clean_email(self):
+            if self.is_valid():
+                email = self.cleaned_data['email']
+                try:
+                    institution = Institution.objects.exclude(pk=self.instance.pk).get(email=email)
+                except Institution.DoesNotExist:
+                    return email
+                raise forms.ValidationError('Email "%s" já sendo utilizado.' % email)
+        
+        def clean_nome(self):
+            if self.is_valid():
+                nome = self.cleaned_data['nome']
+                try:
+                    institution = Institution.objects.exclude(pk=self.instance.pk).get(nome=nome)
+                except Institution.DoesNotExist:
+                    return nome
+                raise forms.ValidationError('Nome "%s" já sendo utilizado.' % nome)
+        
+        def clean_cnpj(self):
+            if self.is_valid():
+                cnpj = self.cleaned_data['cnpj']
+                try:
+                    institution = Institution.objects.exclude(pk=self.instance.pk).get(cnpj=cnpj)
+                except Institution.DoesNotExist:
+                    return cnpj
+                raise forms.ValidationError('CNPJ "%s" já sendo utilizado.' % cnpj)

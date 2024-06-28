@@ -8,6 +8,9 @@ from scholarship.models import Scholarship
 
 def createScholarship(request):
     context = {}
+    context['slugInstitution'] = request.COOKIES.get('slugInstitution')
+    context['nameInstitution'] = request.COOKIES.get('nameInstitution')
+    context['institutionLogged'] = request.COOKIES.get('logged')
 
     institution = request.user
     if not institution.checked and not institution.logged:
@@ -30,6 +33,9 @@ def createScholarship(request):
 
 def editScholarship(request, slug):
     context = {}
+    context['slugInstitution'] = request.COOKIES.get('slugInstitution')
+    context['nameInstitution'] = request.COOKIES.get('nameInstitution')
+    context['institutionLogged'] = request.COOKIES.get('logged')
 
     scholarship = get_object_or_404(Scholarship, slug=slug)
     institution = scholarship.__getattribute__('instituicao')
@@ -61,6 +67,10 @@ def editScholarship(request, slug):
 
 def viewScholarship(request, slug):
     context = {}
+    context['slugInstitution'] = request.COOKIES.get('slugInstitution')
+    context['nameInstitution'] = request.COOKIES.get('nameInstitution')
+    context['institutionLogged'] = request.COOKIES.get('logged')
+    
     scholarship = get_object_or_404(Scholarship, slug=slug)
     context['scholarship'] = scholarship
     return render(request, 'scholarship/viewScholarship.html', context)
@@ -68,6 +78,10 @@ def viewScholarship(request, slug):
 
 def deleteScholarship(request, slug):
     context = {}
+    context['slugInstitution'] = request.COOKIES.get('slugInstitution')
+    context['nameInstitution'] = request.COOKIES.get('nameInstitution')
+    context['institutionLogged'] = request.COOKIES.get('logged')
+    
     scholarship = get_object_or_404(Scholarship, slug=slug)
     institution = scholarship.__getattribute__('instituicao')
     if not institution.checked and not institution.logged:
@@ -84,6 +98,10 @@ def deleteScholarship(request, slug):
 
 def listScholarships(request):
     context = {}
+    context['slugInstitution'] = request.COOKIES.get('slugInstitution')
+    context['nameInstitution'] = request.COOKIES.get('nameInstitution')
+    context['institutionLogged'] = request.COOKIES.get('logged')
+    
     scholarships = Scholarship.objects.all()
     context['scholarships'] = scholarships
     return render(request,'scholarship/listScholarships.html', context)

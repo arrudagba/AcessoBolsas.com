@@ -11,12 +11,17 @@ import string
 from django.views.decorators.csrf import csrf_protect
 from institution.models import Institution
 from institution.forms import InstitutionRegisterForm, InstitutionUpdateForm
+from scholarship.models import Scholarship
+from operator import attrgetter
 
 # Create your views here.
 
 @csrf_protect
 def createInstitution(request):
     context = {}
+    context['slugInstitution'] = request.COOKIES.get('slugInstitution')
+    context['nameInstitution'] = request.COOKIES.get('nameInstitution')
+    context['institutionLogged'] = request.COOKIES.get('logged')
 
     form = InstitutionRegisterForm(request.POST or None, request.FILES or None)
 
@@ -33,6 +38,9 @@ def createInstitution(request):
 
 def editInstitution(request, slug):
     context = {}
+    context['slugInstitution'] = request.COOKIES.get('slugInstitution')
+    context['nameInstitution'] = request.COOKIES.get('nameInstitution')
+    context['institutionLogged'] = request.COOKIES.get('logged')
 
     institution = get_object_or_404(Institution, slug=slug)
 
@@ -67,6 +75,9 @@ def editInstitution(request, slug):
 
 def viewInstitution(request, slug):
     context = {}
+    context['slugInstitution'] = request.COOKIES.get('slugInstitution')
+    context['nameInstitution'] = request.COOKIES.get('nameInstitution')
+    context['institutionLogged'] = request.COOKIES.get('logged')
     institution = get_object_or_404(Institution, slug=slug)
     context['institution'] = institution
     return render(request, 'institution/viewInstitution.html', context)
@@ -74,6 +85,9 @@ def viewInstitution(request, slug):
 
 def deleteInstitution(request, slug):
     context = {}
+    context['slugInstitution'] = request.COOKIES.get('slugInstitution')
+    context['nameInstitution'] = request.COOKIES.get('nameInstitution')
+    context['institutionLogged'] = request.COOKIES.get('logged')
     institution = get_object_or_404(Institution, slug=slug)
 
     if (institution.logged == False):
@@ -91,6 +105,9 @@ def deleteInstitution(request, slug):
 
 def listInstitutions(request):
     context = {}
+    context['slugInstitution'] = request.COOKIES.get('slugInstitution')
+    context['nameInstitution'] = request.COOKIES.get('nameInstitution')
+    context['institutionLogged'] = request.COOKIES.get('logged')
     institutions = Institution.objects.all()
     context['institutions'] = institutions
     return render(request,'institution/listInstitutions.html', context)
@@ -104,6 +121,9 @@ logger = logging.getLogger(__name__)
 
 def loginInstitution(request):
     context = {}
+    context['slugInstitution'] = request.COOKIES.get('slugInstitution')
+    context['nameInstitution'] = request.COOKIES.get('nameInstitution')
+    context['institutionLogged'] = request.COOKIES.get('logged')
 
     if request.method == 'POST':
         cnpj = request.POST.get('cnpj')
@@ -167,6 +187,30 @@ def logoutInstitution(request):
 
 def myAccountInstitution(request, slugInstitution):
     context = {}
+    context['slugInstitution'] = request.COOKIES.get('slugInstitution')
+    context['nameInstitution'] = request.COOKIES.get('nameInstitution')
+    context['institutionLogged'] = request.COOKIES.get('logged')
+    
     institution = get_object_or_404(Institution, slug=slugInstitution)
     context['institution'] = institution
     return render(request,'institution/viewInstitution.html', context)
+
+def institutionScholarships(request, slug):
+    context = {}
+    institution = get_object_or_404(Institution, slug=slug)
+    context['slugInstitution'] = request.COOKIES.get('slugInstitution')
+    context['nameInstitution'] = request.COOKIES.get('nameInstitution')
+    context['institutionLogged'] = request.COOKIES.get('logged')
+
+    query = request.GET.get('q')
+    if query:
+        scholarships = Scholarship.objects.filter(titulo__icontains=query, instituicao=institution)
+    else:
+        scholarships = Scholarship.objects.filter(instituicao=institution).order_by('-titulo')
+        
+    context['scholarships'] = scholarships
+    
+    return render(request, 'institution/InstitutionScholarships.html', context)
+        
+    
+    

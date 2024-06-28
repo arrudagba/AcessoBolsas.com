@@ -9,4 +9,6 @@ urlpatterns = [
     path('', views.listInstitutions, name='list-institution'),
     path('create/', views.createInstitution, name='create-institution'),
     path('<slug>/delete/', views.deleteInstitution, name='delete-institution'),
+    path('institution/<slug:slug>/scholarships/', views.institutionScholarships, name='institution-scholarships'),
+
 ]

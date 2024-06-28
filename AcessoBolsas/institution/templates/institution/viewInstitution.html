@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base2.html' %}
 {% load static %}
 
 {% block content %}
@@ -21,9 +21,9 @@
     </div>
 
     <div class="botões">
-        <button class="botão_editar" type="button">Editar perfil</button>
-        <button class="botão_ver_bolsas" type="button">Bolsas Cadastradas</button>
-        <button class="botão_deletar" type="button">Deletar Perfil</button>
+        <button class="botão_editar" onclick="location.href='{% url 'institution:edit-institution' slug=institution.slug %}'" type="button">Editar perfil</button>
+        <button class="botão_ver_bolsas"  onclick="location.href='{% url 'institution:institution-scholarships' slug=institution.slug %}'" type="button">Bolsas Cadastradas</button>
+        <button class="botão_deletar" onclick="location.href='{% url 'institution:delete-institution' slug=institution.slug %}'" type="button">Deletar Perfil</button>
     </div>
 
 </body>
