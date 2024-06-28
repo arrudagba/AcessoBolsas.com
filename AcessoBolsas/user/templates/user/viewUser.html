@@ -82,11 +82,13 @@
         <div class="field"><span>Telefone:</span> {{ user.telefone }}</div>
         <div class="field"><span>Data de nascimento:</span> {{ user.dataNascimento }}</div>
         <div class="field"><span>Sexo:</span> {{ user.get_sexo_display }}</div>
+        {% if request.user.username == user.username %}
         <div class="actions">
             <a href="{% url 'user:edit-user' slug=user.slug %}" class="edit-button">Editar perfil</a>
             <!-- <a href="#" class="history-button">Histórico de Bolsa</a> -->
             <a href="{% url 'user:delete-user' slug=user.slug %}" class="delete-button">Deletar perfil</a>
         </div>
+        {% endif %}
     </div>
 </body>
 </html>

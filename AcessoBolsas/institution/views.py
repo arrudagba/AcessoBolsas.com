@@ -55,7 +55,12 @@ def editInstitution(request, slug):
             obj.save()
             messages.success(request, 'Instituição atualizada com sucesso!')
             institution = obj
-            return redirect('home')
+            if request.COOKIES.get('nameInstitution') != institution.nome:
+                response = redirect('home')
+                response.set_cookie('nameInstitution', institution.nome)
+                response.set_cookie('slugInstitution', institution.slug)
+
+            return response
         
     form = InstitutionUpdateForm(
         initial={
@@ -69,6 +74,7 @@ def editInstitution(request, slug):
         }
     )
 
+    
     context['form'] = form
     return render(request, 'institution/editInstitution.html', context)
 
