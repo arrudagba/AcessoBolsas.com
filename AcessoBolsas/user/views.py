@@ -12,6 +12,7 @@ from institution.models import Institution
 @csrf_protect
 def registerUser(request):
     context = {}
+
     context['slugInstitution'] = request.COOKIES.get('slugInstitution')
     context['nameInstitution'] = request.COOKIES.get('nameInstitution')
     context['institutionLogged'] = request.COOKIES.get('logged')
@@ -45,41 +46,20 @@ def editUser(request, slug):
     if not request.user.is_authenticated:
         return redirect("login")
 
-    context = {}
-    context['slugInstitution'] = request.COOKIES.get('slugInstitution')
-    context['nameInstitution'] = request.COOKIES.get('nameInstitution')
-    context['institutionLogged'] = request.COOKIES.get('logged')
-
     user = get_object_or_404(User, slug=slug)
 
     if request.method == 'POST':
-        form = UserUpdateForm(request.POST, instance=user, slug=slug)
+        form = UserUpdateForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
-            form.initial = {
-                "email": request.POST['email'],
-                "username": request.POST['username'],
-                "nome": request.POST['nome'],
-                "telefone": request.POST['telefone'],
-                "dataNascimento": request.POST['dataNascimento'],
-                "sexo": request.POST['sexo'],
-            }
             form.save()
             messages.success(request, 'User atualizado com sucesso!')
+            return redirect('home')
         else:
             messages.warning(request, 'E-mail ou username indisponíveis. Tente novamente.')
     else:
-        form = UserUpdateForm(
-        initial={
-                "email": user.email,
-                "username": user.username,
-                "nome": user.nome,
-                "telefone": user.telefone,
-                "dataNascimento": user.dataNascimento,
-                "sexo": user.sexo,
-            }
-        )
+        form = UserUpdateForm(instance=user)
 
-    context['updateForm'] = form
+    context = {'updateForm': form}
 
     return render(request, 'user/editUser.html', context)
 
@@ -100,6 +80,7 @@ def deleteUser(request, slug):
 
         if user:
             user.delete()
+            logout(request)
             messages.success(request, 'Usuário deletado com sucesso!')
             return redirect("home")
         else:
@@ -109,18 +90,22 @@ def deleteUser(request, slug):
 
 def viewUser(request, slug):
     context = {}
+
     context['slugInstitution'] = request.COOKIES.get('slugInstitution')
     context['nameInstitution'] = request.COOKIES.get('nameInstitution')
     context['institutionLogged'] = request.COOKIES.get('logged')
+
     user = get_object_or_404(User, slug=slug)
     context['user'] = user
     return render(request, 'user/viewUser.html', context)
 
 def listUsers(request):
     context = {}
+
     context['slugInstitution'] = request.COOKIES.get('slugInstitution')
     context['nameInstitution'] = request.COOKIES.get('nameInstitution')
     context['institutionLogged'] = request.COOKIES.get('logged')
+
     users = User.objects.all()
     context['users'] = users
     return render(request,'user/listUsers.html', context)
@@ -132,13 +117,14 @@ def logoutUser(request):
 
 def loginUser(request):
     context = {}
+
     context['slugInstitution'] = request.COOKIES.get('slugInstitution')
     context['nameInstitution'] = request.COOKIES.get('nameInstitution')
     context['institutionLogged'] = request.COOKIES.get('logged')
-    
+
     response = redirect('home')
     if request.COOKIES.get('logged') == True:
-        institution = Institution.objects.get(id=request.COOKIES.get('slug'))
+        institution = Institution.objects.get(slug=request.COOKIES.get('slugInstitution'))
         institution.logged = False
         response.set_cookie('logged', False)
         response.set_cookie('slugInstitution', None)
