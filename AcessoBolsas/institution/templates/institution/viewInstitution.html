@@ -19,12 +19,13 @@
             <p>Sobre a Instituição: {{ institution.descricao }}<br></p>
         </div>
     </div>
-
-    <div class="botões">
-        <button class="botão_editar" onclick="location.href='{% url 'institution:edit-institution' slug=institution.slug %}'" type="button">Editar perfil</button>
-        <button class="botão_ver_bolsas"  onclick="location.href='{% url 'institution:institution-scholarships' slug=institution.slug %}'" type="button">Bolsas Cadastradas</button>
-        <button class="botão_deletar" onclick="location.href='{% url 'institution:delete-institution' slug=institution.slug %}'" type="button">Deletar Perfil</button>
-    </div>
+    {% if institution.nome == nameInstitution %}
+        <div class="botões">
+            <button class="botão_editar" onclick="location.href='{% url 'institution:edit-institution' slug=institution.slug %}'" type="button">Editar perfil</button>
+            <button class="botão_ver_bolsas"  onclick="location.href='{% url 'institution:institution-scholarships' slug=institution.slug %}'" type="button">Bolsas Cadastradas</button>
+            <button class="botão_deletar" onclick="location.href='{% url 'institution:delete-institution' slug=institution.slug %}'" type="button">Deletar Perfil</button>
+        </div>
+    {% endif %}
 
 </body>
 
