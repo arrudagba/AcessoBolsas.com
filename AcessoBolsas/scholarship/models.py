@@ -22,7 +22,7 @@ class Scholarship(models.Model):
 
     instituicao = models.ForeignKey('institution.Institution', on_delete=models.CASCADE)
 
-    fotoPerfil = models.ImageField(upload_to='perfil_usuario', default='default.jpg', null=True, blank=True)
+    fotoPerfil = models.ImageField(upload_to='scholarship', default='default.jpg', null=True, blank=True)
 
     slug = models.SlugField(blank=True, unique=True)
 

@@ -145,11 +145,12 @@ input::placeholder {
     display: flex;
     width: 100%;
     position: relative;
-    background-color: rgb(255, 249, 236);
     align-items: center;
     border-radius: 40px;
     margin: auto;
     padding-left: 25px;
+    flex-direction: column;
+    align-items: flex-start; /* Alinha os containers à esquerda */
 }
 
 .div-recomendacoes {
@@ -165,6 +166,61 @@ input::placeholder {
     font-size: 80px;
     color: #405BBC;
     margin: auto;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    background-color: rgb(255, 249, 236);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    width: 100%; /* Mantém o tamanho dos containers */
+}
+
+.card-body .content {
+    flex: 2;
+    padding-right: 20px;
+}
+
+.card-body .content h2 {
+    color: #2e3192;
+    font-size: 24px;
+    margin-bottom: 5px;
+    font-family: Inter;
+}
+
+.card-body .content p {
+    color: #666;
+    font-size: 14px;
+    margin: 0;
+}
+
+.card-body .date {
+    flex: 1;
+    text-align: right;
+    color: #999;
+    font-size: 12px;
+}
+
+.card-body .image {
+    flex: 1;
+    text-align: center;
+}
+
+.card-body .image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    height: 100%; /* Ajusta a altura da imagem */
+}
+
+.card-body .description {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
 }
 
 

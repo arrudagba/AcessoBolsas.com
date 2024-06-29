@@ -1,16 +1,11 @@
+{% extends 'base2.html' %}
+{% load static %}
+
+{% block content %}
 <!DOCTYPE html>
-<html>
+
 <head>
-    <title>User Login</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
         .login-container {
             background-color: white;
             padding: 20px;
@@ -82,4 +77,6 @@
         </form>
     </div>
 </body>
-</html>
+
+
+{% endblock content %}

@@ -51,6 +51,7 @@ urlpatterns = [
     path('sign_up/', SignUp, name='sign_up'),
     path('sign_up/institution/', createInstitution, name='sign_up_institution'),
     path('sign_up/user/', registerUser, name='sign_up_user'),
+    path('scholarship/', include('scholarship.urls')),
 ]
 
 if settings.DEBUG:

@@ -9,25 +9,23 @@
     <div class="div-recomendacoes">
         <p class="text-recomendacoes">Bolsas de estudos recomendadas: </p>
         <div class="recomendacoes">
-            <div class="left-column col-lg-7 offset-lg-1">  
+            <div class="left-column col-lg-7 offset-lg-0">  
                 {% for scholarship in scholarships %}
                 <div>
                     <div class="container">
                         <div class="row">
-                            <div class="card m-auto text-bg-dark">
+                            <div class="card text-bg-dark">
                                 <div class="card-body my-2">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <h2 class="card-titulo">{{scholarship.titulo}}</h2>
+                                    <div class="content">
+                                        <a href='{% url 'scholarship:profile-scholarship' scholarship.slug %}' style="text-decoration: none !important">
+                                            <h2 class="card-titulo" style="font-family: Inter;">{{scholarship.titulo}}</h2>
+                                        </a>
+                                        <p class="card-text text-bg-dark" style="font-family: Inter;">{{scholarship.instituicao}}</p>
+                                        <p class="card-text text-bg-dark" style="font-family: Inter;">{{scholarship.tipoBolsa}}</p>
                                     </div>
-                                    <hr>
-                                    <a href='{% url 'scholarship:profile-scholarship' scholarship.slug %}' style="text-decoration: none !important" class=" link-dark">
-                                        <div class="container">
-                                            <p class="card-text text-bg-dark">{{scholarship.instituicao}}</p>
-                                            <p class="card-text text-bg-dark">{{scholarship.titulo}}</p>
-                                            <p class="card-text text-bg-dark">{{scholarship.tipoBolsa}}</p>
-                                            <p class="card-text text-bg-dark">{{scholarship.fotoPerfil}}</p>
-                                        </div>
-                                    </a>
+                                    <div class="image">
+                                        <img src="{{ scholarship.fotoPerfil.url }}" alt="{{ scholarship.titulo }}">
+                                    </div>
                                 </div>
                             </div>
                         </div>

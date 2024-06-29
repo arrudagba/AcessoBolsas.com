@@ -34,7 +34,7 @@
                     <p class="clickable" >Acompanhar inscrições</p>
                 {% elif institutionLogged %}
                     <p class="clickable" onclick="location.href='{% url 'my_account_institution' slugInstitution=slugInstitution %}'">Perfil</p>
-                    <p class="clickable" >Bolsas cadastradas</p>
+                    <p class="clickable" onclick="location.href='{% url 'institution:institution-scholarships' slug=slugInstitution %}'">Bolsas cadastradas</p>
                 {% endif %}
             </div>
 
@@ -42,11 +42,11 @@
         </div>
 
         {% if request.user.is_authenticated %}
-            <a class="d-flex align-items-center text-white text-decoration-none" style="margin-left: 800px;">
+            <a class="d-flex align-items-center text-white text-decoration-none" style="margin-left: 800px; font-family: Inter;">
             Bem-Vindo, {{request.user.username}}!
             </a>
         {% elif institutionLogged %}
-        <a class="d-flex align-items-center text-white text-decoration-none" style="margin-left: 800px;">
+        <a class="d-flex align-items-center text-white text-decoration-none" style="margin-left: 800px; font-family: Inter;">
             Bem-Vinda, {{nameInstitution}}!
             </a>
         {% endif %}
