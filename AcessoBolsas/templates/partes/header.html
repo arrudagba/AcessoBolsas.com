@@ -32,7 +32,7 @@
                 {% if request.user.is_authenticated %}
                     <p class="clickable" onclick="location.href='{% url 'my_account' username=request.user.username %}'">Perfil</p>
                     <p class="clickable" >Acompanhar inscrições</p>
-                {% elif institutionLogged %}
+                {% elif institutionLogged == True and institutionLogged %}
                     <p class="clickable" onclick="location.href='{% url 'my_account_institution' slugInstitution=slugInstitution %}'">Perfil</p>
                     <p class="clickable" onclick="location.href='{% url 'institution:institution-scholarships' slug=slugInstitution %}'">Bolsas cadastradas</p>
                 {% endif %}
@@ -45,7 +45,7 @@
             <a class="d-flex align-items-center text-white text-decoration-none" style="margin-left: 800px; font-family: Inter;">
             Bem-Vindo, {{request.user.username}}!
             </a>
-        {% elif institutionLogged %}
+        {% elif institutionLogged == True and institutionLogged %}
         <a class="d-flex align-items-center text-white text-decoration-none" style="margin-left: 800px; font-family: Inter;">
             Bem-Vinda, {{nameInstitution}}!
             </a>
@@ -56,7 +56,7 @@
             <button onclick="location.href='{% url 'logout' %}'" class='btn1'>Logout</button>
             <button onclick="location.href='{% url 'my_account' username=request.user.username %}'" class='btn1'>Minha Conta</button>
         </div>
-        {% elif institutionLogged %}
+        {% elif institutionLogged == True and institutionLogged %}
         <div class='buttons'>
             <button onclick="location.href='{% url 'logoutInstitution' %}'" class='btn1'>Logout</button>
             <button onclick="location.href='{% url 'my_account_institution' slugInstitution=slugInstitution %}'" class='btn1'>Minha Conta</button>

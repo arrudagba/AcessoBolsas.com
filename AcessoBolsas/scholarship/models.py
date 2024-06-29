@@ -16,6 +16,8 @@ class Scholarship(models.Model):
 
     descricao = models.TextField(help_text='Descrição da bolsa', max_length=5000, null=False, blank=False)
 
+    dataPrazo = models.DateField(help_text='Data limite para a realização da bolsa', verbose_name='Data limite', null=False, blank=False)
+
     dataPostada = models.DateField(help_text='Data da postagem da bolsa', auto_now_add=True, verbose_name='Data da postagem')
 
     dataAtualizada = models.DateField(help_text='Data da atualização da bolsa', auto_now=True, verbose_name='Data da atualização')

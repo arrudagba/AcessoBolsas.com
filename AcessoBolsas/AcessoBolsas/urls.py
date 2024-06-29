@@ -45,7 +45,7 @@ urlpatterns = [
     path('logout/', logoutUser, name='logout'),
     path('loginInstitution/', loginInstitution, name='loginInstitution'),
     path('logoutInstitution/', logoutInstitution, name='logoutInstitution'),
-    path('scholarship/', include('scholarship.urls')),
+    # path('scholarship/', include('scholarship.urls')),
     path('institution/', include('institution.urls')),
     path('sign_in/', SignIn, name='sign_in'),
     path('sign_up/', SignUp, name='sign_up'),

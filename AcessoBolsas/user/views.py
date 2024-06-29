@@ -43,6 +43,12 @@ def registerUser(request):
     return render(request, 'user/registerUser.html', context)
 
 def editUser(request, slug):
+    context = {}
+
+    context['slugInstitution'] = request.COOKIES.get('slugInstitution')
+    context['nameInstitution'] = request.COOKIES.get('nameInstitution')
+    context['institutionLogged'] = request.COOKIES.get('logged')
+
     if not request.user.is_authenticated:
         return redirect("login")
 
@@ -59,7 +65,7 @@ def editUser(request, slug):
     else:
         form = UserUpdateForm(instance=user)
 
-    context = {'updateForm': form}
+    context['updateForm'] = form
 
     return render(request, 'user/editUser.html', context)
 
@@ -155,6 +161,7 @@ def loginUser(request):
 
 def myAccountUser(request, username):
     context = {}
+    
     context['slugInstitution'] = request.COOKIES.get('slugInstitution')
     context['nameInstitution'] = request.COOKIES.get('nameInstitution')
     context['institutionLogged'] = request.COOKIES.get('logged')

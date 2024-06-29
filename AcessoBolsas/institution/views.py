@@ -44,37 +44,24 @@ def editInstitution(request, slug):
 
     institution = get_object_or_404(Institution, slug=slug)
 
-    if (institution.logged == False):
-        return redirect('home')
+    if not institution.checked or not institution.logged:
+        return redirect("loginInstitution")
 
-    if request.POST == 'POST':
-        form = InstitutionUpdateForm(request.POST, request.FILES or None,
-                                     instance=institution)
+    if request.method == 'POST':
+        form = InstitutionUpdateForm(request.POST, request.FILES, instance=institution)
         if form.is_valid():
-            obj = form.save(commit=False)
-            obj.save()
+            form.save()
             messages.success(request, 'Instituição atualizada com sucesso!')
-            institution = obj
+            response = redirect('home')
             if request.COOKIES.get('nameInstitution') != institution.nome:
-                response = redirect('home')
                 response.set_cookie('nameInstitution', institution.nome)
                 response.set_cookie('slugInstitution', institution.slug)
-
             return response
-        
-    form = InstitutionUpdateForm(
-        initial={
-            'nome': institution.nome,
-            'cnpj': institution.cnpj,
-            'email': institution.email,
-            'contato': institution.contato,
-            'endereco': institution.endereco,
-            'descricao': institution.descricao,
-            'fotoPerfil': institution.fotoPerfil,
-        }
-    )
+        else:
+            messages.warning(request, 'Erro ao atualizar a instituição. Tente novamente.')
+    else:
+        form = InstitutionUpdateForm(instance=institution)
 
-    
     context['form'] = form
     return render(request, 'institution/editInstitution.html', context)
 
@@ -91,19 +78,25 @@ def viewInstitution(request, slug):
 
 def deleteInstitution(request, slug):
     context = {}
+
     context['slugInstitution'] = request.COOKIES.get('slugInstitution')
     context['nameInstitution'] = request.COOKIES.get('nameInstitution')
     context['institutionLogged'] = request.COOKIES.get('logged')
+
     institution = get_object_or_404(Institution, slug=slug)
 
-    if (institution.logged == False):
-        return redirect('home')
+    if not institution.checked or not institution.logged:
+        return redirect("loginInstitution")
     
     if request.POST:
         institution.fotoPerfil.delete()
         institution.delete()
+        response = redirect('home')
+        response.set_cookie('logged', False)
+        response.set_cookie('slugInstitution', None)
+        response.set_cookie('nameInstitution', None)
         messages.success(request, 'Instituição excluída com sucesso!')
-        return redirect('home')
+        return response
     
     context['institution'] = institution
     return render(request, 'institution/deleteInstitution.html', context)
@@ -111,9 +104,11 @@ def deleteInstitution(request, slug):
 
 def listInstitutions(request):
     context = {}
+
     context['slugInstitution'] = request.COOKIES.get('slugInstitution')
     context['nameInstitution'] = request.COOKIES.get('nameInstitution')
     context['institutionLogged'] = request.COOKIES.get('logged')
+
     institutions = Institution.objects.all()
     context['institutions'] = institutions
     return render(request,'institution/listInstitutions.html', context)
@@ -127,6 +122,7 @@ logger = logging.getLogger(__name__)
 
 def loginInstitution(request):
     context = {}
+
     context['slugInstitution'] = request.COOKIES.get('slugInstitution')
     context['nameInstitution'] = request.COOKIES.get('nameInstitution')
     context['institutionLogged'] = request.COOKIES.get('logged')
@@ -193,6 +189,7 @@ def logoutInstitution(request):
 
 def myAccountInstitution(request, slugInstitution):
     context = {}
+
     context['slugInstitution'] = request.COOKIES.get('slugInstitution')
     context['nameInstitution'] = request.COOKIES.get('nameInstitution')
     context['institutionLogged'] = request.COOKIES.get('logged')
@@ -203,6 +200,7 @@ def myAccountInstitution(request, slugInstitution):
 
 def institutionScholarships(request, slug):
     context = {}
+    
     institution = get_object_or_404(Institution, slug=slug)
     context['slugInstitution'] = request.COOKIES.get('slugInstitution')
     context['nameInstitution'] = request.COOKIES.get('nameInstitution')
