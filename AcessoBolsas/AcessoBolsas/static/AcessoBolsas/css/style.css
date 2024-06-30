@@ -653,6 +653,7 @@ input[type="date"] {
     font-weight: bold;
     margin: 5px;
     font-family: Inter;
+    cursor: pointer;
 }
 
 .subs{
@@ -669,6 +670,7 @@ input[type="date"] {
     font-weight: bold;
     margin: 5px;
     font-family: Inter;
+    cursor: pointer;
 }
 
 .contact{
@@ -685,6 +687,7 @@ input[type="date"] {
     font-weight: bold;
     margin: 5px;
     font-family: Inter;
+    cursor: pointer;
 }
 
 .see_profile{
@@ -701,7 +704,7 @@ input[type="date"] {
     font-weight: bold;
     margin: 5px;
     font-family: Inter;
-
+    cursor: pointer;
 }
 
 

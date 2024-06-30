@@ -1,0 +1,10 @@
+{% extends 'base2.html' %}
+
+{% block content %}
+    <h2>Minhas Bolsas de Estudo</h2>
+    <ul>
+        {% for scholarship in scholarships %}
+            <li>{{ scholarship.titulo }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
