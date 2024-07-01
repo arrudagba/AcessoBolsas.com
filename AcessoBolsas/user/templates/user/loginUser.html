@@ -3,66 +3,9 @@
 
 {% block content %}
 <!DOCTYPE html>
-
-<head>
-    <style>
-        .login-container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            width: 100%;
-        }
-        .login-container h2 {
-            margin-bottom: 20px;
-        }
-        .login-container form {
-            display: flex;
-            flex-direction: column;
-        }
-        .login-container label {
-            margin-bottom: 5px;
-        }
-        .login-container input {
-            margin-bottom: 15px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .login-container button {
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .login-container button:hover {
-            background-color: #0056b3;
-        }
-        .messages {
-            margin-bottom: 20px;
-        }
-        .messages p {
-            padding: 10px;
-            border-radius: 5px;
-        }
-        .messages .success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        .messages .error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-    </style>
-</head>
 <body>
     <div class="login-container">
-        <h2>Login</h2>
+        <h2 class="titulo_login">Login</h2>
         <div class="messages">
             {% if messages %}
                 {% for message in messages %}
@@ -73,10 +16,8 @@
         <form method="POST" action="{% url 'login' %}">
             {% csrf_token %}
             {{ loginForm.as_p }}
-            <button type="submit">Login</button>
+            <button type="submit" class="btn_login">Login</button>
         </form>
     </div>
 </body>
-
-
 {% endblock content %}

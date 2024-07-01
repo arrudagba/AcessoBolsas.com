@@ -5,27 +5,33 @@
 <!DOCTYPE html>
 
 <body>
-    <h2>Login Institution</h2>
-    {% if message %}
-        <p>{{ message }}</p>
-        <form method="POST" action="{% url 'loginInstitution' %}">
-            {% csrf_token %}
-            <input type="hidden" name="cnpj" value="{{ cnpj }}">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required><br><br>
-            <button type="submit">Login</button>
-        </form>
-    {% else %}
-        {% if error %}
-            <p style="color: red;">{{ error }}</p>
+    <div class="form-container">
+        <h2 style="font-family: Inter;">Login Instituição</h2>
+        {% if message %}
+            <p>{{ message }}</p>
+            <form method="POST" action="{% url 'loginInstitution' %}">
+                {% csrf_token %}
+                <input type="hidden" name="cnpj" value="{{ cnpj }}">
+                <div class="spacing">
+                    <label for="password" class="form-label">Password:</label>
+                    <input type="password" id="password" name="password" class="form-input" required>
+                </div>
+                <button type="submit" class="form-button">Login</button>
+            </form>
+        {% else %}
+            {% if error %}
+                <p style="color: red;">{{ error }}</p>
+            {% endif %}
+            <form method="POST" action="{% url 'loginInstitution' %}">
+                {% csrf_token %}
+                <div class="spacing">
+                    <label for="cnpj" class="form-label">CNPJ:</label>
+                    <input type="text" id="cnpj" name="cnpj" class="form-input" required>
+                </div>
+                <button type="submit" class="form-button">Send Password</button>
+            </form>
         {% endif %}
-        <form method="POST" action="{% url 'loginInstitution' %}">
-            {% csrf_token %}
-            <label for="cnpj">CNPJ:</label>
-            <input type="text" id="cnpj" name="cnpj" required><br><br>
-            <button type="submit">Send Password</button>
-        </form>
-    {% endif %}
+    </div>
 </body>
 
 
