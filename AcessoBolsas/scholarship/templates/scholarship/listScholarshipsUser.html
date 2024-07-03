@@ -1,10 +1,35 @@
 {% extends 'base2.html' %}
 
 {% block content %}
-    <h2>Minhas Bolsas de Estudo</h2>
-    <ul>
-        {% for scholarship in scholarships %}
-            <li>{{ scholarship.titulo }}</li>
-        {% endfor %}
-    </ul>
+<div class="div-recomendacoes">
+    <p class="text-recomendacoes">Bolsas de estudos inscritas: </p>
+    <div class="recomendacoes">
+        <div class="left-column col-lg-7 offset-lg-0">  
+            {% for scholarship in scholarships %}
+            <div>
+                <div class="container">
+                    <div class="row">
+                        <div class="card text-bg-dark">
+                            <div class="card-body my-2">
+                                <div class="content">
+                                    <a href='{% url 'scholarship:profile-scholarship' scholarship.slug %}' style="text-decoration: none !important">
+                                        <h2 class="card-titulo" style="font-family: Inter;">{{scholarship.titulo}}</h2>
+                                    </a>
+                                    <p class="card-text text-bg-dark" style="font-family: Inter;">{{scholarship.instituicao}}</p>
+                                    <p class="card-text text-bg-dark" style="font-family: Inter;">{{scholarship.tipoBolsa}}</p>
+                                </div>
+                                <div class="image">
+                                    <img src="{{ scholarship.fotoPerfil.url }}" alt="{{ scholarship.titulo }}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+                <p>Sem Bolsas</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 {% endblock %}

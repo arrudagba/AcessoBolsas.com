@@ -3,88 +3,30 @@
 
 {% block content %}
 <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visualizar Usuário</title>
-    <style>
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .profile-pic {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background-size: cover;
-            background-position: center;
-            margin: 0 auto 20px;
-        }
-        .field {
-            margin-bottom: 10px;
-        }
-        .field span {
-            font-weight: bold;
-            color: #333;
-        }
-        .field input[type="checkbox"] {
-            margin-left: 10px;
-        }
-        .tags {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-        .actions {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-        .actions a {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            color: white;
-            text-align: center;
-        }
-        .edit-button {
-            background-color: #4CAF50;
-        }
-        .history-button {
-            background-color: #007BFF;
-        }
-        .delete-button {
-            background-color: #F44336;
-        }
-    </style>
-</head>
+
 <body>
-    <div class="container">
-        <div class="profile-pic" style="background-image: url('{{ user.fotoPerfil.url }}');"></div>
-        <div class="field"><span>Usuário(a):</span> {{ user.username }}</div>
-        <div class="field"><span>Nome:</span> {{ user.nome }}</div>
-        <div class="field"><span>Email:</span> {{ user.email }}</div>
-        <div class="field"><span>Telefone:</span> {{ user.telefone }}</div>
-        <div class="field"><span>Data de nascimento:</span> {{ user.dataNascimento }}</div>
-        <div class="field"><span>Sexo:</span> {{ user.get_sexo_display }}</div>
-        {% if request.user.username == user.username %}
-        <div class="actions">
-            <a href="{% url 'user:edit-user' slug=user.slug %}" class="edit-button">Editar perfil</a>
-            <!-- <a href="#" class="history-button">Histórico de Bolsa</a> -->
-            <a href="{% url 'user:delete-user' slug=user.slug %}" class="delete-button">Deletar perfil</a>
+
+    <div class="usuário">
+        <div class="pfp">
+            <img src="{{ user.fotoPerfil.url }}" class="user_image">
         </div>
-        {% endif %}
+
+        <div class="textos_instituicao">
+            <p>Usuário(a): {{ user.username }}<br></p>
+            <p>Nome: {{ user.nome }}<br></p>
+            <p>Email: {{ user.email }}<br></p>
+            <p>Telefone: {{ user.telefone }}<br></p>
+            <p>Data de nascimento: {{ user.dataNascimento }}<br></p>
+	    <p>Sexo: {{ user.get_sexo_display }}<br></p>
+        </div>
     </div>
+    {% if request.user.username == user.username %}
+        <div class="botões">
+            <button class="botão_editar" onclick="location.href='{% url 'user:edit-user' slug=user.slug %}'" type="button">Editar perfil</button>
+            <button class="botão_deletar" onclick="location.href='{% url 'user:delete-user' slug=user.slug %}'" type="button">Deletar Perfil</button>
+        </div>
+    {% endif %}
+
 </body>
-</html>
 
 {% endblock content %}
