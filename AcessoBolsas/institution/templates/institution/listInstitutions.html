@@ -1,0 +1,27 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title> Lista de Instituções </title>
+    <head>
+    <body>
+        <a href="{% url 'institution:create-institution' %}">Criar Instituição</a>
+        <h1> Lista de Instituições </h1>
+        <table>
+            <tr><th>nome</th><th>cnpj</th><th>contato</th></tr>
+            {% if institutions %}
+                {% for institution in institutions %}
+                    <tr>
+                        <td>{{ institution.nome }}</td><td>{{ institution.cnpj }}</td><td>{{ institution.contato }}</td>
+                        <td><a href="{% url 'institution:edit-institution' slug=institution.slug %}">Editar</a> / 
+                             <a href="{% url 'institution:profile-institution' slug=institution.slug %}">View</a> / 
+                             <a href="{% url 'institution:delete-institution' slug=institution.slug %}">Deletar</a></td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr><th colspan="5">Ainda não tem instituições cadastradas</th></tr>
+            {% endif %} 
+        </table>
+    </body>
+</html>

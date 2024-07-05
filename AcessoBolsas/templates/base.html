@@ -1,0 +1,33 @@
+{% load static %}
+<!doctype html>
+<html lang='en'>
+
+<head>
+    {% include 'partes/header.html' %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>AcessoBolsas.com</title>
+    <link href="{% static '/AcessoBolsas/css/style.css' %}" rel="stylesheet" type="text/css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Outfit:wght@100..900&display=swap"
+        rel="stylesheet">
+    
+</head>
+
+<body>
+    <main>
+        <div class='main'>
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </main>
+    <footer>
+        {% include 'partes/footer.html' %}
+    </footer>
+</body>

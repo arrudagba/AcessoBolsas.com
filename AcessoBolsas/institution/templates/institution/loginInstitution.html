@@ -1,0 +1,39 @@
+{% extends 'base2.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+
+<body>
+    <div class="form-container">
+        <h2 style="font-family: Inter;">Login Instituição</h2>
+        {% if message %}
+            <p>{{ message }}</p>
+            <form method="POST" action="{% url 'loginInstitution' %}">
+                {% csrf_token %}
+                <input type="hidden" name="cnpj" value="{{ cnpj }}">
+                <div class="spacing">
+                    <label for="password" class="form-label">Password:</label>
+                    <input type="password" id="password" name="password" class="form-input" required>
+                </div>
+                <button type="submit" class="form-button">Login</button>
+            </form>
+        {% else %}
+            {% if error %}
+                <p style="color: red;">{{ error }}</p>
+            {% endif %}
+            <form method="POST" action="{% url 'loginInstitution' %}">
+                {% csrf_token %}
+                <div class="spacing">
+                    <label for="cnpj" class="form-label">CNPJ:</label>
+                    <input type="text" id="cnpj" name="cnpj" class="form-input" required>
+                </div>
+                <button type="submit" class="form-button">Send Password</button>
+            </form>
+        {% endif %}
+    </div>
+</body>
+
+
+
+{% endblock content %}

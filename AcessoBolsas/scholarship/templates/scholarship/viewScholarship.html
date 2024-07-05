@@ -1,0 +1,112 @@
+{% extends 'base2.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+
+<body>
+    <p class="voltar" onclick="history.go(-1);"><img src="{% static 'AcessoBolsas/img/seta_back.png' %}" class="img_seta" /><u>Voltar</u></p>
+    <div class="div-recomendacoes">
+        <div class="recomendacoes_post">
+            <div class="header_inst">
+                <div>
+                    <div class="nome_inst">
+                        <p class="pnome_inst">Nome da Instituição: {{ scholarship.instituicao.nome }}</p>
+                    </div>
+                    <div class="tipo_bolsa">
+                        <p class="ptipo_bolsa"><u>Tipo de Bolsa: {{ scholarship.tipoBolsa }}</u></p>
+                    </div>
+                    <div class="desc_inst">
+                        <p class="pdesc_inst">Descrição:</p>
+                        <p style="margin-left: 25px; max-width: 350px;">{{ scholarship.descricao }}</p>
+                    </div>
+                </div>
+                <div class="foto_inst">
+                    <img class="img_inst" src="{{ scholarship.fotoPerfil.url }}" />
+                </div>
+            </div>
+            <div class="tags_anuncio">
+                <div class="center_tags_anuncio">
+                    <div class="anuncio">
+                        <p class="panuncio">Prazo de inscrição: {{scholarship.dataPrazo}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom_inst">
+                <div class="div_coment">
+                    <!-- <p class="coment_title"><i>Comentários & Perguntas:</i></p>
+                    <div class="coment"><i>*Exemplo de comentario*</i></div> -->
+                </div>
+                {% if scholarship.instituicao.nome == nameInstitution %}
+                    <div class="buttons_inst">
+                        <button class="see_profile" onclick="location.href='{% url 'scholarship:edit-scholarship' slug=scholarship.slug %}'">Editar bolsa</button>
+                        <button class="see_profile" onclick="location.href='{% url 'institution:profile-institution' slug=scholarship.instituicao.slug %}'">Ver perfil</button>
+                        <button class="see_profile" onclick="location.href='{% url 'scholarship:delete-scholarship' slug=scholarship.slug %}'">Deletar bolsa</button>
+                    </div>
+                {% else %}
+                    <div class="buttons_inst">
+                        <button class="share" onclick="shareLink()">Compartilhar</button>
+                        {% if user.is_authenticated %}
+                            <form method="POST" action="{% url 'scholarship:inscrever-scholarship' scholarship.slug %}">
+                                {% csrf_token %}
+                                <button type="submit" class="subs">Inscrever-se na bolsa</button>
+                            </form>
+                        {% else %}
+                            <p><a href="{% url 'login' %}">Faça login</a> para se inscrever.</p>
+                        {% endif %}
+                        <button class="contact" onclick="contactInstitution()">Entrar em contato</button>
+                        <button class="see_profile" onclick="location.href='{% url 'institution:profile-institution' slug=scholarship.instituicao.slug %}'">Ver perfil</button>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <script>
+        function shareLink() {
+            const currentURL = window.location.href;
+        
+            fetch(window.location.pathname, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken'),
+                },
+                body: JSON.stringify({ url: currentURL })
+            })
+            .then(response => response.json())
+            .then(data => console.log('Success:', data))
+            .catch((error) => console.error('Error:', error));
+        }
+        
+        function contactInstitution() {
+            fetch(window.location.pathname, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken'),
+                },
+                body: JSON.stringify({ action: 'contact' })
+            })
+            .then(response => response.json())
+            .then(data => console.log('Success:', data))
+            .catch((error) => console.error('Error:', error));
+        }
+        
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+    </script>
+</body>
+
+{% endblock content %}

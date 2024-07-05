@@ -1,0 +1,20 @@
+{% extends 'base2.html' %}
+{% load static %}
+
+{% block content %}
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Bolsa {{ form.instance.titulo }}</title>
+</head>
+<body>
+    <h3 class='text-center'>Editar Bolsa</h3>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Atualizar Bolsa</button>
+    </form>
+</body>
+</html>
+{% endblock content %}

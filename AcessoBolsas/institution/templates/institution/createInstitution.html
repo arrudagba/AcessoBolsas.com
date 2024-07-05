@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+
+<body>
+    <p class="voltar" onclick="history.go(-1);"><img src="{% static '\institution\img\seta_back.png' %}" class="img_seta" /><u>Voltar</u></p>
+    <div class="div-box">
+        <p class="blank1"></p>
+        <div class="box">
+            <div class="questions">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <p class="headerInput">Nome da Instituição: </p>
+                    <input type="text" class="inputCadastro" name="nome" placeholder="Nome:" />
+
+                    <p class="headerInput">CNPJ: </p>
+                    <input type="number" class="inputCadastro" name="cnpj" placeholder="CNPJ:" />
+
+                    <p class="headerInput">Telefone: </p>
+                    <input type="text" class="inputCadastro" name="contato" placeholder="Tel:" />
+                    
+                    <p class="headerInput">E-mail: </p>
+                    <input type="email" class="inputCadastro" name="email" placeholder="E-mail:" />
+
+                    <p class="headerInput">Endereço: </p>
+                    <input type="text" class="inputCadastro" name="endereco" placeholder="Endereço:" />
+
+                    <p class="headerInput">Descrição sobre a Instituição: </p>
+                    <textarea class="inputCadastro_text_desc" name="descricao"></textarea>
+                    
+                    {% comment %} {% for field in registrationForm %}
+                    <p>
+                        {% for error in field.errors %}
+                        <p style="color: red;">{{ error }}</p>
+                        {% endfor %}
+                    </p>
+                    {% endfor %}
+                    {% if registrationForm.non_field_errors %}
+                    <div style="color: red;">
+                        <p>{{ registrationForm.non_field_errors }}</p>
+                    </div>
+                    {% endif %} {% endcomment %}
+                    <button type='submit' class="cadastre-se">Cadastre-se</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'AcessoBolsas/js/script.js' %}"></script>
+
+</body>
+
+{% endblock content %}

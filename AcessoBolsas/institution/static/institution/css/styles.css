@@ -1,0 +1,160 @@
+p{
+    font-family: Roboto;
+}
+
+footer{
+    text-align: center;
+    padding: 3px;
+    background-color: rgb(230, 230, 230);
+    color: black;
+}
+
+.head{
+    display: flex;
+    flex: 1;
+    width: 100%;
+    position: relative;
+    height: 200px;
+    background-color: rgb(255, 249, 236);
+    border: none;
+    margin-top: 60px;
+    align-items: center;
+    
+}
+
+.linha{
+    display: flex;
+    flex: 1;
+    width: 100%;
+    position: fixed;
+    height: 60px;
+    background-color: rgb(255,255,255);
+    top: 0;
+    left: 0;
+    z-index: 10000;
+}
+.logo{
+    margin: auto;
+}
+.logo_image{
+    height: 120px;
+    cursor: pointer;
+}
+
+.menu_image{
+    height: 40px;
+    margin-left: 30px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.logout{
+    margin-left: 85%;
+    margin-top: 10px;
+}
+
+.botão_logout{
+    color: white;
+    background-color: rgb(255, 77, 77);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border: none;
+    border-radius: 10px;
+}
+
+.botão_logout:hover{
+    background-color: rgb(230, 32, 32);
+    cursor: pointer;
+}
+
+.botão_logout:active{
+    background-color: rgb(186, 28, 28);
+}
+
+.usuário{
+    display: grid;
+    grid-template-rows: auto;
+    row-gap: 40px;
+    align-items: center;
+    margin-top: 90px;
+    margin-left: 20%;
+    margin-right: 20%;
+    flex: 1;
+    
+}
+
+.pfp{
+    margin: auto;
+
+}
+
+.user_image{
+    height: 250px;
+}
+
+.textos{
+    font-size: 25px;
+    font-weight: bold;
+    color: rgb(64, 91, 188);
+}
+
+
+.botões {
+    display: grid;
+    grid-template-columns: repeat(3, auto); 
+    column-gap: 70px; 
+    align-items: center;
+    margin-top: 90px;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-bottom: 20px;
+    flex: 1;
+}
+
+.botão_editar, .botão_ver_bolsas, .botão_deletar {
+    color: white;
+    padding: 15px 60px; 
+    border: none;
+    border-radius: 10px;
+}
+
+.botão_editar {
+    background-color: rgb(63, 170, 93);
+}
+
+.botão_ver_bolsas {
+    background-color: rgb(49, 37, 192);
+}
+
+.botão_deletar {
+    background-color: rgb(218, 13, 13);
+}
+
+.botão_editar:hover{
+    background-color: rgb(51, 137, 76);
+    cursor: pointer;
+}
+
+.botão_editar:active{
+    background-color: rgb(33, 104, 53);
+}
+
+.botão_ver_bolsas:hover{
+    background-color: rgb(42, 31, 158);
+    cursor: pointer;
+}
+
+.botão_ver_bolsas:active{
+    background-color: rgb(32, 23, 134);
+}
+
+.botão_deletar:hover{
+    background-color: rgb(170, 15, 15);
+    cursor: pointer;
+}
+
+.botão_deletar:active{
+    background-color: rgb(150, 9, 9);
+}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!doctype html>
+<html lang="en">
+    <title>Deletar Usuário</title>
+    <head>
+        <h3 class='text-center'>Deletar Usuário</h3>
+    </head>
+    <body>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3 text-center">
+                <h3>Tem certeza que deseja apagar sua conta?</h3>
+            </div>
+            <div class="mb-3">
+                <label for="id_username" class="form-label">Username</label>
+                <input type="text" name="username" class="form-control" id="id_username" placeholder="Digite seu username" required>
+            </div>
+            <div class="mb-3">
+                <label for="id_password" class="form-label">Senha</label>
+                <input type="password" name="password" class="form-control" id="id_password" placeholder="Digite sua senha" required>
+            </div>
+            {% if failed_message %}
+            <p style="color: red; text-align: center;">{{ failed_message }}</p>
+            {% endif %}
+            <div class="text-center">
+                <button type="submit" class="btn btn-danger">Apagar</button>
+            </div>
+        </form>
+    </body>
+
+{% endblock content %}

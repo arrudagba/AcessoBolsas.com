@@ -1,0 +1,23 @@
+{% extends 'base2.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<body>
+    <div class="login-container">
+        <h2 class="titulo_login">Login</h2>
+        <div class="messages">
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="{{ message.tags }}">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            {{ loginForm.as_p }}
+            <button type="submit" class="btn_login">Login</button>
+        </form>
+    </div>
+</body>
+{% endblock content %}

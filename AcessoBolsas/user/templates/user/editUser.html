@@ -1,0 +1,17 @@
+{% extends 'base2.html' %}
+{% load static %}
+
+{% block content %}
+<!doctype html>
+<html lang="en">
+
+<body>
+    <h3 class='text-center'>Editar Usuário</h3>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ updateForm.as_p }}
+        <button type="submit" class="btn btn-primary">Atualizar Usuário</button>
+    </form>
+</body>
+</html>
+{% endblock content %}

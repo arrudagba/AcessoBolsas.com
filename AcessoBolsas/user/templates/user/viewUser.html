@@ -1,0 +1,32 @@
+{% extends 'base2.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+
+<body>
+
+    <div class="usuário">
+        <div class="pfp">
+            <img src="{{ user.fotoPerfil.url }}" class="user_image">
+        </div>
+
+        <div class="textos_instituicao">
+            <p>Usuário(a): {{ user.username }}<br></p>
+            <p>Nome: {{ user.nome }}<br></p>
+            <p>Email: {{ user.email }}<br></p>
+            <p>Telefone: {{ user.telefone }}<br></p>
+            <p>Data de nascimento: {{ user.dataNascimento }}<br></p>
+	    <p>Sexo: {{ user.get_sexo_display }}<br></p>
+        </div>
+    </div>
+    {% if request.user.username == user.username %}
+        <div class="botões">
+            <button class="botão_editar" onclick="location.href='{% url 'user:edit-user' slug=user.slug %}'" type="button">Editar perfil</button>
+            <button class="botão_deletar" onclick="location.href='{% url 'user:delete-user' slug=user.slug %}'" type="button">Deletar Perfil</button>
+        </div>
+    {% endif %}
+
+</body>
+
+{% endblock content %}

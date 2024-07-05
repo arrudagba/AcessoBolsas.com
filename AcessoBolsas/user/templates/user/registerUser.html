@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+
+<body>
+    <p class="voltar" onclick="history.go(-1);"><img src="{% static '\institution\img\seta_back.png' %}" class="img_seta" /><u>Voltar</u></p>
+    <div class="div-box">
+        <div class="box_cadastro_usu">
+            <div class="questions_cadastro_usu">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <p class="headerInput">Nome Completo: </p>
+                    <input type="text" class="inputCadastro" name="nome" placeholder="Nome:" required/>
+                    
+                    <p class="headerInput">Telefone: </p>
+                    <input type="number" class="inputCadastro" name="telefone" placeholder="Tel:" />
+
+                    <p class="headerInput">E-mail: </p>
+                    <input type="email" class="inputCadastro" name="email" placeholder="E-mail:" required/>
+
+                    <p class="headerInput">Data de nascimento: </p>
+                    <input type="date" class="inputCadastro" name="dataNascimento" placeholder="Data:" />
+
+                    <p class="headerInput">Sexo: </p>
+                    <select class="select_genero" name="sexo" >
+                        <option value="" disabled selected>Selecione</option>
+                        <option>Feminino</option>
+                        <option>Masculino</option>
+                        <option>Outro</option>
+                    </select>
+
+                    <p class="headerInput">Username: </p>
+                    <input type="text" class="inputCadastro" name="username" placeholder="Login:" required/>
+
+                    <p class="headerInput">Defina sua senha: </p>
+                    <input type="password" class="inputCadastro" name="password1" placeholder="Senha:" required/>
+                    
+                    <p class="headerInput">Confirme sua senha: </p>
+                    <input type="password" class="inputCadastro" name="password2" placeholder="Senha:" required/>
+
+                    {% for field in registrationForm %}
+                    <p>
+                        {% for error in field.errors %}
+                        <p style="color: red;">{{ error }}</p>
+                        {% endfor %}
+                    </p>
+                    {% endfor %}
+                    {% if registrationForm.non_field_errors %}
+                    <div style="color: red;">
+                        <p>{{ registrationForm.non_field_errors }}</p>
+                    </div>
+                    {% endif %}
+                    <button type="submit" class="cadastre-se">Cadastre-se</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'AcessoBolsas/js/script.js' %}"></script>
+
+</body>
+
+{% endblock content %}

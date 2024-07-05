@@ -1,0 +1,33 @@
+{% extends 'base2.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+
+<body>
+
+    <div class="usuário">
+        <div class="pfp">
+            <img src="{{ institution.fotoPerfil.url }}" class="user_image">
+        </div>
+
+        <div class="textos_instituicao">
+            <p>Nome da instituição: {{ institution.nome }}<br></p>
+            <p>CNPJ: {{ institution.cnpj }}<br></p>
+            <p>Contatos: {{ institution.contato }}<br></p>
+            <p>Endereço: {{ institution.endereco }}<br></p>
+            <p>Sobre a Instituição: {{ institution.descricao }}<br></p>
+        </div>
+    </div>
+    {% if institution.nome == nameInstitution %}
+        <div class="botões">
+            <button class="botão_editar" onclick="location.href='{% url 'institution:edit-institution' slug=institution.slug %}'" type="button">Editar perfil</button>
+            <button class="botão_ver_bolsas"  onclick="location.href='{% url 'institution:institution-scholarships' slug=institution.slug %}'" type="button">Bolsas Cadastradas</button>
+            <button class="botão_deletar" onclick="location.href='{% url 'institution:delete-institution' slug=institution.slug %}'" type="button">Deletar Perfil</button>
+            <button class="botão_editar" onclick="location.href='{% url 'scholarship:create-scholarship' %}'" type="button">Criar bolsas</button>
+        </div>
+    {% endif %}
+
+</body>
+
+{% endblock content %}

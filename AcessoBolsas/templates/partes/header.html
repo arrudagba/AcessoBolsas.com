@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+
+
+ 
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>AcessoBolsas.com</title>
+<link href="{% static '/AcessoBolsas/css/style.css' %}" rel="stylesheet" type="text/css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Outfit:wght@100..900&display=swap"
+    rel="stylesheet">
+
+
+<header>
+    <div class="linha_menu">
+        <button class="botão-body"><img src="{% static 'img/menu.png' %}" class="menu_image"></button>
+        <div class="menu">
+            <div class="linha">
+                <button class="botão-linha"><img src="{% static 'img/menu.png' %}" class="menu_image"></button>
+                <p class="texto_menu">Menu</p>
+            </div>
+
+            <div class="textos">
+                <p>wedwed</p>
+                <p class="clickable" onclick="location.href='{% url 'home' %}'">Inicio</p>
+                {% if request.user.is_authenticated %}
+                    <p class="clickable" onclick="location.href='{% url 'my_account' username=request.user.username %}'">Perfil</p>
+                    <p class="clickable" onclick="location.href='{% url 'scholarship:listar-scholarships-user' %}'">Acompanhar inscrições</p>
+                {% elif institutionLogged == True and institutionLogged %}
+                    <p class="clickable" onclick="location.href='{% url 'my_account_institution' slugInstitution=slugInstitution %}'">Perfil</p>
+                    <p class="clickable" onclick="location.href='{% url 'institution:institution-scholarships' slug=slugInstitution %}'">Bolsas cadastradas</p>
+                {% endif %}
+            </div>
+
+            <p class="sair">Sair</p>
+        </div>
+
+        {% if request.user.is_authenticated %}
+            <a class="d-flex align-items-center text-white text-decoration-none" style="margin-left: 650px; font-family: Inter;">
+            Bem-Vindo, {{request.user.username}}!
+            </a>
+        {% elif institutionLogged == True and institutionLogged %}
+        <a class="d-flex align-items-center text-white text-decoration-none" style="margin-left: 650px; font-family: Inter;">
+            Bem-Vinda, {{nameInstitution}}!
+            </a>
+        {% endif %}
+        
+        {% if request.user.is_authenticated %}
+        <div class='buttons'>
+            <button onclick="location.href='{% url 'logout' %}'" class='btn1'>Logout</button>
+            <button onclick="location.href='{% url 'my_account' username=request.user.username %}'" class='btn1'>Minha Conta</button>
+        </div>
+        {% elif institutionLogged == True and institutionLogged %}
+        <div class='buttons'>
+            <button onclick="location.href='{% url 'logoutInstitution' %}'" class='btn1'>Logout</button>
+            <button onclick="location.href='{% url 'my_account_institution' slugInstitution=slugInstitution %}'" class='btn1'>Minha Conta</button>
+        </div>
+        {% else %}
+            <div class='buttons'>
+                <button onclick="location.href='{% url 'sign_in' %}'" class='btn1'>Sign In</button>
+                <button onclick="location.href='{% url 'sign_up' %}'" class='btn1'>Sign Up</button>
+            </div>
+        {% endif %}
+    </div>
+    <div class='head'>
+        <div class="div-logo">
+            <div class='logo'>
+                <p class="titulo">AcessoBolsas.com</p>
+                <img class="pencil_image" src="{% static 'AcessoBolsas/img/pencil.png' %}">
+                <div class="input">
+                    <form method="GET" action="{% url 'home' %}">
+                        <span><img src="{% static 'AcessoBolsas/img/lupa.png' %}" class="input-img" onclick="this.closest('form').submit();"></span>
+                        <input class="input-pesquisa" type="text" name="q" placeholder="Search..." value="{{ request.GET.q }}">
+                        <span><img src="{% static 'AcessoBolsas/img/filtro.png' %}" class="input-img"></span>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<script src="{% static 'js/menu.js' %}"></script>
+
+
+

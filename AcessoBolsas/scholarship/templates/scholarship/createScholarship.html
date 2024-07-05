@@ -1,0 +1,87 @@
+{% extends 'base2.html' %}
+{% load static %}
+
+{% block content %}
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Criar Bolsa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-group input[type="file"] {
+            padding: 3px;
+        }
+        .form-group button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center">Criar Bolsa</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_titulo" class="form-label">Título</label>
+                <input type="text" name="titulo" class="form-control" id="id_titulo" placeholder="Título da bolsa" required autofocus>
+            </div>
+            <div class="form-group">
+                <label for="id_tipoBolsa" class="form-label">Tipo da bolsa</label>
+                <input type="text" name="tipoBolsa" class="form-control" id="id_tipoBolsa" placeholder="Tipo da bolsa" required>
+            </div>
+            <div class="form-group">
+                <label for="id_descricao" class="form-label">Descrição</label>
+                <textarea name="descricao" rows="10" class="form-control" id="id_descricao" placeholder="Descrição completa da bolsa" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="id_dataPrazo" class="form-label">Data limite</label>
+                <input type="date" name="dataPrazo" class="form-control" id="id_dataPrazo" placeholder="Data limite para a realização da bolsa" required>
+            </div>
+            <div class="form-group">
+                <label for="id_fotoPerfil" class="form-label">Foto de Perfil</label>
+                <input type="file" name="fotoPerfil" class="form-control" id="id_fotoPerfil">
+            </div>
+            <div class="form-group">
+                <button type="submit">Criar Bolsa</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+{% endblock content %}

@@ -1,0 +1,27 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title> Lista de Bolsas </title>
+    <head>
+    <body>
+        <a href="{% url 'scholarship:create-scholarship' %}">Criar Bolsa</a>
+        <h1> Lista de Bolsas </h1>
+        <table>
+            <tr><th>titulo</th><th>tipoBolsa</th><th>descricao</th></tr>
+            {% if scholarships %}
+                {% for scholarship in scholarships %}
+                    <tr>
+                        <td>{{ scholarship.titulo }}</td><td>{{ scholarship.tipoBolsa }}</td><td>{{ scholarship.descricao }}</td>
+                        <td><a href="{% url 'scholarship:edit-scholarship' slug=scholarship.slug %}">Editar</a> /
+                            <a href="{% url 'scholarship:profile-scholarship' slug=scholarship.slug %}">View</a> /  
+                            <a href="{% url 'scholarship:delete-scholarship' slug=scholarship.slug %}">Deletar</a></td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr><th colspan="5">Ainda não tem bolsas cadastradas</th></tr>
+            {% endif %} 
+        </table>
+    </body>
+</html>
