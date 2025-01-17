@@ -26,8 +26,8 @@ Certifique-se de que possui os seguintes programas instalados em sua máquina:
 1. **Clone este repositório**  
    Abra o terminal e execute:  
    ```bash
-   git clone https://github.com/usuario/projeto-bolsas.git
-   cd projeto-bolsas
+   git clone https://github.com/arrudagba/AcessoBolsas.com.git
+   cd AcessoBolsas.com
 2. **Crie e ative um ambiente virtual**
     ```bash
     python -m venv venv
