@@ -46,3 +46,4 @@ O servidor estará disponível em http://127.0.0.1:8000.
 - Discentes e organizações podem se cadastrar e acessar o sistema para usufruir de funcionalidades personalizadas.
 
 ### Demonstração em Vídeo
+
