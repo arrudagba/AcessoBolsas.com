@@ -1,7 +1,12 @@
 # ![](media/logo.png)
 
-# Sistema de Bolsas de Estudo
-
+# AcessoBolsas.com
+<div style="display: inline_block">
+  <img align="center" alt="HTML5" src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
+  <img align="center" alt="CSS3" src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
+  <img align="center" alt="JS" src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
+  <img align="center" alt="Python" src="https://img.shields.io/badge/Python-14354C?style=for-the-badge&logo=python&logoColor=white" />
+</div><br/>
 Este projeto foi desenvolvido como parte da disciplina INF1039 da PUC-Rio. Trata-se de um site construído com o framework Django, HTML, CSS e JavaScript, com o objetivo de auxiliar calouros e veteranos na busca por bolsas de estudo em suas respectivas universidades.
 
 O site oferece uma plataforma intuitiva tanto para as organizações quanto para os discentes. As organizações podem divulgar as bolsas de estudo disponíveis, enquanto os discentes têm uma experiência de navegação simples e eficiente para encontrar a bolsa ideal.
@@ -46,4 +51,4 @@ O servidor estará disponível em http://127.0.0.1:8000.
 - Discentes e organizações podem se cadastrar e acessar o sistema para usufruir de funcionalidades personalizadas.
 
 ### Demonstração em Vídeo
-
+https://github.com/user-attachments/assets/253897c7-9dbf-4163-b434-8c91d1eae75b
